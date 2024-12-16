@@ -7,14 +7,18 @@ import Footer from "../components/footer";
 
 function Index() {
   return (
-    <>
+    <div className="flex flex-col min-h-screen">
       <Header />
-      <Routes>
-        <Route path="/*" element={<Frontend />} />
-        <Route path="/auth/*" element={<Auth />} />
-      </Routes>
+
+      <main className="flex-grow">
+        <Routes>
+          <Route path="/*" element={<Frontend />} />
+          <Route path="/auth/*" element={<Auth />} />
+        </Routes>
+      </main>
+
       <Footer />
-    </>
+    </div>
   );
 }
 
