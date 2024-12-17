@@ -1,6 +1,7 @@
 import React from "react";
-import Carasoul from "../../components/carasoul/Carasoul";
+
+import Carousel from "../../components/carousel/";
 
 export default function Home() {
-  return <Carasoul />;
+  return <Carousel />;
 }
