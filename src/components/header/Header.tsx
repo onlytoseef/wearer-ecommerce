@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { LuUserRound } from "react-icons/lu";
 import { PiShoppingCart } from "react-icons/pi";
+import { Link } from "react-router-dom";
 
 export default function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -25,30 +26,30 @@ export default function Header() {
           </div>
           {/* Navigation Links (Large screens) */}
           <nav className="hidden md:flex space-x-8 absolute left-1/2 transform -translate-x-1/2">
-            <a
-              href="#"
+            <Link
+              to="/"
               className="text-secondary transition duration-300 ease-in-out hover:border-b-2"
             >
               Home
-            </a>
-            <a
-              href="#"
+            </Link>
+            <Link
+              to="/category"
               className="text-secondary transition duration-300 ease-in-out hover:border-b-2"
             >
-              Shop
-            </a>
-            <a
-              href="#"
+              Trousers
+            </Link>
+            <Link
+              to="/about"
               className="text-secondary transition duration-300 ease-in-out hover:border-b-2"
             >
               About
-            </a>
-            <a
-              href="#"
+            </Link>
+            <Link
+              to="/terms"
               className="text-secondary transition duration-300 ease-in-out hover:border-b-2"
             >
-              Contact
-            </a>
+              Return/Exchange
+            </Link>
           </nav>
 
           {/* Cart and Account Links */}

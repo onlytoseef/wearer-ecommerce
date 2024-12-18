@@ -4,6 +4,7 @@ module.exports = {
     extend: {
       fontFamily: {
         monster: ['"Montserrat"', "sans-serif"],
+        secondary: ["Bricolage Grotesque"],
       },
       colors: {
         primary: "#425652",
