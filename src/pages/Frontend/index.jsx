@@ -14,6 +14,7 @@ export default function Index() {
       <Route path="/terms" element={<Terms />} />
       <Route path="/category" element={<Categories />} />
       <Route path="*" element={<NotFound />} />
+      <Route path="/upcoming" element={<NotFound />} />
     </Routes>
   );
 }
