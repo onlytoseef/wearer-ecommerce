@@ -92,27 +92,21 @@ export default function Header() {
         {isMobileMenuOpen && (
           <div className="md:hidden bg-white shadow-lg py-4">
             <nav className="flex flex-col space-y-4 items-center">
-              <a
-                href="#"
+              <Link
+                to="/"
                 className="text-gray-800 text-lg font-medium"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 Home
-              </a>
-              <a
-                href="#"
-                className="text-gray-800 text-lg font-medium"
-                onClick={() => setIsMobileMenuOpen(false)}
-              >
-                Shop
-              </a>
-              <a
-                href="#"
+              </Link>
+
+              <Link
+                to="/about"
                 className="text-gray-800 text-lg font-medium"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 About
-              </a>
+              </Link>
               <a
                 href="#"
                 className="text-gray-800 text-lg font-medium"

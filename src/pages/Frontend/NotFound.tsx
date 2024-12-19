@@ -24,7 +24,7 @@ const NotFound = () => {
       </motion.p>
       <Link to="/">
         <motion.div
-          className="px-6 py-3 bg-green-700 text-white rounded-lg hover:bg-green-600 transition shadow-lg"
+          className="px-6 py-3 bg-primary text-white rounded-lg hover:bg-green-900 transition shadow-lg"
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.9 }}
           transition={{ duration: 0.2 }}

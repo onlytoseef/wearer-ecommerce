@@ -83,11 +83,11 @@ const Carousel = () => {
                   WebkitTextStroke: "2px #ffffff",
                   color: "transparent",
                 }}
-                className="text-[6rem] text-white  p-3 rounded-3xl"
+                className="sm:text-[6rem] text-[5rem] text-white font-monster  p-3 rounded-3xl"
               >
                 {slides[currentIndex].text.split(" ")[0]}
               </span>{" "}
-              <span className="">
+              <span className="text-secondary sm:text-[4rem] text-[1.5rem]">
                 {slides[currentIndex].text.split(" ").slice(1).join(" ")}
               </span>
             </div>
