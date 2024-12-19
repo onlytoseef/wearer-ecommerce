@@ -18,12 +18,12 @@ const About = () => {
   }, []);
 
   const scrollAnimation = {
-    x: scrollY * 0.3,
+    x: scrollY * 0.1,
     transition: { type: "tween", ease: "linear" },
   };
 
   const reverseScrollAnimation = {
-    x: -scrollY * 0.3,
+    x: -scrollY * 0.1,
     transition: { type: "tween", ease: "linear" },
   };
 

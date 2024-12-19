@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import { LuUserRound } from "react-icons/lu";
 import { PiShoppingCart } from "react-icons/pi";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import Logo from "../../assets/images/Logo/Logo.svg";
 
 export default function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-
+  const navigate = useNavigate();
   return (
     <header className="sticky text-center top-0 font-monster z-10">
       <div className="font-monster text-primary bg-secondary">
@@ -21,9 +22,15 @@ export default function Header() {
             ☰
           </button>
 
-          <div className="text-2xl font-bold text-secondary font-monster flex items-center">
+          {/* <div className="text-2xl font-bold text-secondary font-monster flex items-center">
             Wearers
-          </div>
+          </div> */}
+          <img
+            className="hover:cursor-pointer"
+            src={Logo}
+            width={70}
+            onClick={() => navigate("/")}
+          />
           {/* Navigation Links (Large screens) */}
           <nav className="hidden md:flex space-x-8 absolute left-1/2 transform -translate-x-1/2">
             <Link
