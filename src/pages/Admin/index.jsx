@@ -8,10 +8,10 @@ import AddProduct from "./AddProduct";
 export default function Index() {
   return (
     <Routes>
-      <Route path="/admin" element={<Home />} />
-      <Route path="/admin/login" element={<AdminLogin />} />
-      <Route path="/orders" element={<TrackOrder />} />
-      <Route path="/addProduct" element={<AddProduct />} />
+      <Route path="/" element={<Home />} />
+      <Route path="admin/login" element={<AdminLogin />} />
+      <Route path="orders" element={<TrackOrder />} />
+      <Route path="addProduct" element={<AddProduct />} />
     </Routes>
   );
 }
