@@ -1,13 +1,16 @@
-import React from "react";
-import CategoryCarousel from "../../components/CategoryCarousel";
+import React, { Suspense } from "react";
 
 export default function Categories() {
+  const Lazy = React.lazy(() => import("../../components/CategoryCarousel"));
+
   return (
     <>
       <div className="text-center py-5 font-secondary text-[3rem] font-[450] sm:text-[3rem]">
         Categories
       </div>
-      <CategoryCarousel />
+      <Suspense fallback={<div>Loading Categories ..</div>}>
+        <Lazy />
+      </Suspense>
     </>
   );
 }
