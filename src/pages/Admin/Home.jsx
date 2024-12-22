@@ -5,13 +5,11 @@ import {
   NotificationOutlined,
   HomeOutlined,
 } from "@ant-design/icons";
-import { Link, Route, Routes, useLocation } from "react-router-dom";
+import { Link, useLocation, Outlet } from "react-router-dom";
 
 import Logo from "../../assets/images/Logo/Logo.svg";
+
 const { Header, Content, Sider } = Layout;
-import Index from "./index";
-import Orders from "./Orders";
-import AddProduct from "./AddProduct";
 
 const Home = () => {
   const location = useLocation();
@@ -20,38 +18,17 @@ const Home = () => {
     {
       key: "/admin",
       icon: <HomeOutlined />,
-      label: (
-        <Link
-          className="!text-secondary  hover:!text-primary focus:!text-primary active:!text-primary"
-          to="/admin"
-        >
-          Home
-        </Link>
-      ),
+      label: <Link to="/admin">Home</Link>,
     },
     {
       key: "/admin/orders",
       icon: <LaptopOutlined />,
-      label: (
-        <Link
-          className="!text-secondary  hover:!text-primary focus:!text-primary active:!text-primary"
-          to="/admin/orders"
-        >
-          Track Order
-        </Link>
-      ),
+      label: <Link to="/admin/orders">Track Order</Link>,
     },
     {
       key: "/admin/addProduct",
       icon: <NotificationOutlined />,
-      label: (
-        <Link
-          className="!text-secondary   hover:!text-primary focus:!text-primary active:!text-primary"
-          to="/admin/addProducts"
-        >
-          Add Product
-        </Link>
-      ),
+      label: <Link to="/admin/addProduct">Add Product</Link>,
     },
   ];
 
@@ -61,7 +38,7 @@ const Home = () => {
         className="bg-primary text-primary"
         collapsible
         breakpoint="lg"
-        collapsedWidth="100"
+        collapsedWidth="60"
         width={250}
       >
         <div className="text-center">
@@ -80,10 +57,7 @@ const Home = () => {
         </Header>
         <Content style={{ margin: "16px" }}>
           <div style={{ padding: 24, background: "#fff", minHeight: 360 }}>
-            <Routes>
-              <Route path="orders" element={<Orders />} />
-              <Route path="addProduct" element={<AddProduct />} />
-            </Routes>
+            <Outlet /> {/* Render child routes here */}
           </div>
         </Content>
       </Layout>

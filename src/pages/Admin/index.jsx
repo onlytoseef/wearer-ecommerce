@@ -7,9 +7,11 @@ import AddProduct from "./AddProduct";
 export default function Index() {
   return (
     <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="orders" element={<Orders />} />
-      <Route path="addProduct" element={<AddProduct />} />
+      <Route path="/" element={<Home />}>
+        {/* Child Routes */}
+        <Route path="orders" element={<Orders />} />
+        <Route path="addProduct" element={<AddProduct />} />
+      </Route>
     </Routes>
   );
 }
