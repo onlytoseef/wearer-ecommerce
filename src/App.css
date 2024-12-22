@@ -1,0 +1,42 @@
+.ant-layout-sider-trigger {
+  background-color: white !important; /* Changes the background to white */
+  color: black !important; /* Changes the icon color to black */
+  border-top: 1px solid #f0f0f0; /* Optional: Add a subtle border for separation */
+}
+
+/* Default state */
+.ant-menu-item {
+  background-color: white !important; /* White background for menu items */
+  color: black !important; /* Black text color */
+  transition: all 0.3s ease-in-out; /* Smooth transitions */
+}
+
+/* Hover state */
+.ant-menu-item:hover {
+  background-color: #f5f5f5 !important; /* Light gray background on hover */
+  color: #425652 !important; /* Blue text on hover */
+}
+
+/* Focus/Active state */
+.ant-menu-item-selected {
+  background-color: #e6f7ff !important; /* Light blue background for selected item */
+  color: #425652 !important; /* Blue text for selected item */
+  font-weight: bold; /* Make selected item text bold */
+  border-left: 4px solid #425652; /* Optional: Add a left border for emphasis */
+}
+
+/* Icons inside menu items */
+.ant-menu-item .anticon {
+  color: black !important; /* Default icon color */
+  transition: color 0.3s ease-in-out; /* Smooth transition for icon color */
+}
+
+/* Hover icons */
+.ant-menu-item:hover .anticon {
+  color: #425652 !important; /* Blue icon color on hover */
+}
+
+/* Focused/Active icons */
+.ant-menu-item-selected .anticon {
+  color: #425652 !important; /* Blue icon color for selected item */
+}
