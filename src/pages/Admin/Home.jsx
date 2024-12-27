@@ -8,6 +8,7 @@ import {
 import { Link, useLocation, Outlet } from "react-router-dom";
 
 import Logo from "../../assets/images/Logo/Logo.svg";
+import { useSelector } from "react-redux";
 
 const { Header, Content, Sider } = Layout;
 
@@ -32,6 +33,9 @@ const Home = () => {
     },
   ];
 
+  const admin = useSelector((state) => state.adminAuth.user);
+  const { displayName } = admin;
+
   return (
     <Layout className="min-h-[100vh]">
       <Sider
@@ -52,11 +56,19 @@ const Home = () => {
         />
       </Sider>
       <Layout>
-        <Header className="bg-primary text-center font-monster text-secondary text-2xl pt-[.8vh]">
-          <h1>Admin Dashboard</h1>
+        <Header className="bg-primary items-center text-center justify-between  flex text-secondary ">
+          <h1 className="text-lg font-secondary sm:text-[2rem]">
+            Admin Dashboard
+          </h1>
+
+          <div className="text-sm">{displayName}</div>
         </Header>
-        <Content style={{ margin: "16px" }}>
-          <div style={{ padding: 24, background: "#fff", minHeight: 360 }}>
+
+        <Content>
+          <div
+            style={{ padding: 24, background: "#fff", minHeight: 360 }}
+            className="min-h-[100vh]"
+          >
             <Outlet /> {/* Render child routes here */}
           </div>
         </Content>

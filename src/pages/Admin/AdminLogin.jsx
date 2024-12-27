@@ -77,7 +77,13 @@ export default function AdminLogin() {
         </Form.Item>
 
         <Form.Item>
-          <Button type="primary" htmlType="submit" block loading={isLoading}>
+          <Button
+            type="primary"
+            className="bg-primary hover:!bg-green-700"
+            htmlType="submit"
+            block
+            loading={isLoading}
+          >
             {isLoading ? "Logging in..." : "Login"}
           </Button>
         </Form.Item>

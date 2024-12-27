@@ -1,12 +1,11 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { getAuth, signInWithEmailAndPassword, signOut } from "firebase/auth";
-import { authApp } from "../../config/firebase";
+import { signInWithEmailAndPassword, signOut } from "firebase/auth";
+import { auth } from "../../config/firebase"; // Import `auth` directly
 
 export const adminLogin = createAsyncThunk(
   "admin/login",
   async ({ email, password }, { rejectWithValue }) => {
     try {
-      const auth = getAuth(authApp);
       const userCredential = await signInWithEmailAndPassword(
         auth,
         email,
@@ -27,7 +26,6 @@ export const adminLogout = createAsyncThunk(
   "admin/logout",
   async (_, { rejectWithValue }) => {
     try {
-      const auth = getAuth(authApp);
       await signOut(auth);
       return true;
     } catch (error) {
