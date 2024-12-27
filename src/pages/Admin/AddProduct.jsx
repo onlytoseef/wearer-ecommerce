@@ -115,21 +115,25 @@ const AddProduct = () => {
       key: "quantity",
     },
     {
+      title: "Product Price",
+      dataIndex: "price",
+      key: "price",
+    },
+    {
       title: "Action",
       key: "action",
       render: (_, record) => (
         <>
           <Button
             onClick={() => handleEditProduct(record)}
-            icon={<EditOutlined />}
+            icon={<EditOutlined className="text-green-600" />}
             style={{ marginRight: 8 }}
           >
             Edit
           </Button>
           <Button
-            type="danger"
             onClick={() => handleDeleteProduct(record.id)}
-            icon={<DeleteOutlined />}
+            icon={<DeleteOutlined className="text-red-500" />}
           >
             Delete
           </Button>
@@ -146,6 +150,9 @@ const AddProduct = () => {
       >
         Add Product
       </Button>
+
+      <h1 className="text-center sm:text-[2rem] font-monster">All Products</h1>
+      <hr className="mb-4" />
 
       <Suspense fallback={<Spin size="large" tip="Loading Products..." />}>
         <LazyTable
@@ -224,6 +231,13 @@ const AddProduct = () => {
           >
             <InputNumber min={1} style={{ width: "100%" }} />
           </Form.Item>
+          <Form.Item
+            name="price"
+            label="Product Price"
+            rules={[{ required: true, message: "Please enter Product Price" }]}
+          >
+            <InputNumber min={1} style={{ width: "100%" }} />
+          </Form.Item>
 
           <Form.Item
             name="sizes"
@@ -241,7 +255,11 @@ const AddProduct = () => {
           </Form.Item>
 
           <Form.Item>
-            <Button type="primary" htmlType="submit" block>
+            <Button
+              className="bg-primary text-white hover:!bg-green-900 hover:!text-white hover:!outline-primary"
+              htmlType="submit"
+              block
+            >
               {editingProduct ? "Update Product" : "Add Product"}
             </Button>
           </Form.Item>
