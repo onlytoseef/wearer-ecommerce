@@ -136,16 +136,12 @@ const AddProduct = () => {
   return (
     <div className="min-h-100">
       <Button
-        className="text-white hover:!text-white hover:bg-green-900 !bg-primary "
+        className="bg-primary text-white hover:bg-transparent hover:!text-primary hover:!outline-primary font-monster "
         onClick={() => setIsModalOpen(true)}
       >
-        Add New Product
+        Add Product
       </Button>
 
-      <h1 className="text-center mb-2 sm:text-[2rem] font-secondary">
-        All Products
-      </h1>
-      <hr />
       {/* Lazy loading the Table with Suspense */}
       <Suspense fallback={<Spin size="large" tip="Loading Products..." />}>
         <LazyTable
@@ -154,6 +150,8 @@ const AddProduct = () => {
           rowKey="id"
           loading={status === "loading"}
           pagination={{ pageSize: 5 }}
+          // Add responsive behavior here
+          scroll={{ x: 768 }} // Horizontal scroll on small screens
         />
       </Suspense>
 
