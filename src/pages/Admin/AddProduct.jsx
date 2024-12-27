@@ -16,7 +16,7 @@ import {
   updateProduct,
   deleteProduct,
 } from "../../store/features/productSlice";
-import { EditOutlined, DeleteOutlined } from "@ant-design/icons"; // Import icons
+import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
 
 const { Option } = Select;
 const LazyTable = React.lazy(() => import("antd/es/table"));
@@ -29,7 +29,6 @@ const AddProduct = () => {
 
   const [form] = Form.useForm();
 
-  // Fetch products when component mounts
   useEffect(() => {
     dispatch(fetchProducts());
   }, [dispatch]);
@@ -37,7 +36,6 @@ const AddProduct = () => {
   const handleAddProduct = async (values) => {
     try {
       if (editingProduct) {
-        // If editing an existing product
         await dispatch(
           updateProduct({ id: editingProduct.id, updatedProduct: values })
         ).unwrap();
@@ -46,7 +44,6 @@ const AddProduct = () => {
           description: "The product has been updated successfully!",
         });
       } else {
-        // Add a new product
         await dispatch(addProduct(values)).unwrap();
         notification.success({
           message: "Product Added",
@@ -72,26 +69,34 @@ const AddProduct = () => {
 
   const handleEditProduct = (product) => {
     setEditingProduct(product);
-    form.setFieldsValue(product);
+    form.setFieldsValue({
+      ...product,
+      images: product.images ? product.images.join(", ") : "",
+    });
     setIsModalOpen(true);
   };
 
   const columns = [
     {
-      title: "Image",
-      dataIndex: "image",
-      key: "image",
-      render: (image) => (
-        <img
-          src={image}
-          alt="Product"
-          style={{
-            width: 50,
-            height: 50,
-            objectFit: "cover", // Maintain aspect ratio
-            borderRadius: "50%", // Make the image round
-          }}
-        />
+      title: "Images",
+      dataIndex: "images",
+      key: "images",
+      render: (images) => (
+        <div style={{ display: "flex", gap: "5px" }}>
+          {images.map((img, index) => (
+            <img
+              key={index}
+              src={img}
+              alt={`Product-${index}`}
+              style={{
+                width: 50,
+                height: 50,
+                objectFit: "cover",
+                borderRadius: "50%",
+              }}
+            />
+          ))}
+        </div>
       ),
     },
     {
@@ -116,7 +121,7 @@ const AddProduct = () => {
         <>
           <Button
             onClick={() => handleEditProduct(record)}
-            icon={<EditOutlined />} // Edit icon
+            icon={<EditOutlined />}
             style={{ marginRight: 8 }}
           >
             Edit
@@ -124,7 +129,7 @@ const AddProduct = () => {
           <Button
             type="danger"
             onClick={() => handleDeleteProduct(record.id)}
-            icon={<DeleteOutlined />} // Delete icon
+            icon={<DeleteOutlined />}
           >
             Delete
           </Button>
@@ -136,26 +141,30 @@ const AddProduct = () => {
   return (
     <div className="min-h-100">
       <Button
-        className="bg-primary text-white hover:bg-transparent hover:!text-primary hover:!outline-primary font-monster "
+        className="bg-primary text-white hover:bg-transparent hover:!text-primary hover:!outline-primary font-monster"
         onClick={() => setIsModalOpen(true)}
       >
         Add Product
       </Button>
 
-      {/* Lazy loading the Table with Suspense */}
       <Suspense fallback={<Spin size="large" tip="Loading Products..." />}>
         <LazyTable
           columns={columns}
-          dataSource={products}
+          dataSource={products.map((product) => ({
+            ...product,
+            images: product.images
+              ? Array.isArray(product.images)
+                ? product.images
+                : product.images.split(",").map((img) => img.trim())
+              : [],
+          }))}
           rowKey="id"
           loading={status === "loading"}
           pagination={{ pageSize: 5 }}
-          // Add responsive behavior here
-          scroll={{ x: 768 }} // Horizontal scroll on small screens
+          scroll={{ x: 768 }}
         />
       </Suspense>
 
-      {/* Modal for adding/updating product */}
       <Modal
         title={editingProduct ? "Edit Product" : "Add Product"}
         open={isModalOpen}
@@ -186,10 +195,10 @@ const AddProduct = () => {
           </Form.Item>
 
           <Form.Item
-            name="image"
-            label="Product Image URL"
+            name="images"
+            label="Product Image URLs (comma-separated)"
             rules={[
-              { required: true, message: "Please enter product image URL" },
+              { required: true, message: "Please enter product image URLs" },
             ]}
           >
             <Input />
