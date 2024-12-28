@@ -7,6 +7,7 @@ import Categories from "./Categories";
 import NotFound from "./NotFound";
 import ComingSoon from "./ComingSoon";
 import ProductsPage from "./ProductPage";
+import ProductDetailsPage from "./ProductDetailPage";
 
 export default function Index() {
   return (
@@ -16,6 +17,8 @@ export default function Index() {
       <Route path="/terms" element={<Terms />} />
       <Route path="/category" element={<Categories />} />
       <Route path="*" element={<NotFound />} />
+      <Route path="/products/:productId" element={<ProductDetailsPage />} />
+      {/* Updated route */}
       <Route path="/upcoming" element={<ComingSoon />} />
       <Route path="/productPage" element={<ProductsPage />} />
     </Routes>
