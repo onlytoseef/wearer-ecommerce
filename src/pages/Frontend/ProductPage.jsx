@@ -19,7 +19,7 @@ const ProductPage = () => {
   };
 
   return (
-    <div className="bg-gray-100 min-h-screen">
+    <div className="bg-gray-100 font-monster min-h-screen">
       <div className="container mx-auto px-4 py-8">
         <h1 className="text-3xl font-bold text-center mb-8">Our Products</h1>
 
@@ -62,17 +62,10 @@ const ProductPage = () => {
                 </div>
 
                 {/* Product Details */}
-                <div className="p-4">
+                <div className="p-4 text-center">
                   <h2 className="text-xl font-semibold">{product.name}</h2>
-                  <p className="text-gray-600">{product.category}</p>
-                  <p className="text-gray-500 text-sm">{product.description}</p>
+
                   <p className="text-green-600 font-bold">${product.price}</p>
-                  <p className="text-sm text-gray-600">
-                    Sizes: {product.sizes ? product.sizes.join(", ") : "N/A"}
-                  </p>
-                  <p className="text-sm text-gray-600">
-                    Quantity: {product.quantity}
-                  </p>
                 </div>
 
                 {/* Actions */}

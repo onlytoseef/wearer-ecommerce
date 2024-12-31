@@ -74,7 +74,7 @@ const ProductDetailsPage = () => {
   }
 
   return (
-    <div className="container mx-auto p-6">
+    <div className="container font-monster mx-auto p-6">
       <div className="flex flex-col lg:flex-row gap-8">
         {/* Images Section */}
         <motion.div
@@ -117,12 +117,16 @@ const ProductDetailsPage = () => {
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.5 }}
         >
-          <h1 className="text-3xl font-bold mb-4">{product.name || "N/A"}</h1>
-          <p className="text-lg text-gray-600 mb-6">
-            {product.description || "No description available."}
+          <h1 className="text-3xl text-center font-[400] font-secondary mb-4">
+            {product.name || "N/A"}
+          </h1>
+          <p className=" font-semibold text-center text-green-600 mb-6">
+            Rs.{product.price || "0.00"}
           </p>
-          <p className="text-xl font-semibold text-green-600 mb-6">
-            ${product.price || "0.00"}
+          <hr />
+          <p className="mt-2 font-secondary text-lg ">Product Description :</p>
+          <p className=" text-gray-600 mb-6">
+            {product.description || "No description available."}
           </p>
 
           {/* Size Selector */}
