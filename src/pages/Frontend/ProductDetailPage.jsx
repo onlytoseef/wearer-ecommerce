@@ -6,14 +6,16 @@ import { Spin, Alert } from "antd";
 import { firestore } from "../../config/firebase";
 
 const ProductDetailsPage = () => {
-  const { id } = useParams();
+  const { productId } = useParams(); // Ensure productId is correctly derived from the URL
   const [product, setProduct] = useState(null);
   const [quantity, setQuantity] = useState(1);
+  const [selectedSize, setSelectedSize] = useState("");
+  const [activeImage, setActiveImage] = useState("");
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    if (!id) {
+    if (!productId) {
       setError("Invalid product ID. Please check the URL.");
       setLoading(false);
       return;
@@ -21,11 +23,15 @@ const ProductDetailsPage = () => {
 
     const fetchProduct = async () => {
       try {
-        const docRef = doc(firestore, "products", id);
+        const docRef = doc(firestore, "products", productId);
         const docSnap = await getDoc(docRef);
 
         if (docSnap.exists()) {
-          setProduct(docSnap.data());
+          const productData = docSnap.data();
+          const imagesArray = productData.images?.split(",") || []; // Convert images string to array
+          productData.images = imagesArray; // Update productData with the array
+          setProduct(productData);
+          setActiveImage(imagesArray[0] || ""); // Set the first image as default
         } else {
           setError("Product not found. Please ensure the product exists.");
         }
@@ -38,11 +44,12 @@ const ProductDetailsPage = () => {
     };
 
     fetchProduct();
-  }, [id]);
+  }, [productId]);
 
   const handleIncrement = () => setQuantity((prev) => prev + 1);
   const handleDecrement = () =>
     setQuantity((prev) => (prev > 1 ? prev - 1 : 1));
+  const handleSizeSelect = (e) => setSelectedSize(e.target.value);
 
   if (loading) {
     return (
@@ -69,22 +76,41 @@ const ProductDetailsPage = () => {
   return (
     <div className="container mx-auto p-6">
       <div className="flex flex-col lg:flex-row gap-8">
-        {/* Images */}
+        {/* Images Section */}
         <motion.div
           className="flex flex-col items-center lg:w-1/2"
           initial={{ opacity: 0, x: -50 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.5 }}
         >
-          <img
-            src={product.images || "https://via.placeholder.com/400"}
-            alt={product.name || "Product Image"}
-            className="w-full h-96 object-cover rounded-lg"
-            onError={(e) => (e.target.src = "https://via.placeholder.com/400")}
-          />
+          <div className="border border-gray-200 rounded-lg overflow-hidden mb-4">
+            <img
+              src={activeImage || "https://via.placeholder.com/400"}
+              alt={product.name || "Product Image"}
+              className="w-full h-96 object-cover rounded-lg"
+              onError={(e) =>
+                (e.target.src = "https://via.placeholder.com/400")
+              }
+            />
+          </div>
+
+          {/* Image Thumbnails */}
+          <div className="flex gap-2">
+            {product.images?.map((img, index) => (
+              <img
+                key={index}
+                src={img}
+                alt={`Thumbnail ${index}`}
+                onClick={() => setActiveImage(img)}
+                className={`w-20 h-20 object-cover border-2 rounded-lg cursor-pointer ${
+                  activeImage === img ? "border-blue-500" : "border-gray-200"
+                }`}
+              />
+            ))}
+          </div>
         </motion.div>
 
-        {/* Product Details */}
+        {/* Product Details Section */}
         <motion.div
           className="lg:w-1/2"
           initial={{ opacity: 0, x: 50 }}
@@ -98,6 +124,29 @@ const ProductDetailsPage = () => {
           <p className="text-xl font-semibold text-green-600 mb-6">
             ${product.price || "0.00"}
           </p>
+
+          {/* Size Selector */}
+          {product.sizes?.length > 0 && (
+            <div className="mb-6">
+              <label className="block text-lg font-medium mb-2">
+                Select Size:
+              </label>
+              <select
+                value={selectedSize}
+                onChange={handleSizeSelect}
+                className="border border-gray-300 rounded-md px-4 py-2 w-full"
+              >
+                <option value="" disabled>
+                  Choose a size
+                </option>
+                {product.sizes.map((size, index) => (
+                  <option key={index} value={size}>
+                    {size}
+                  </option>
+                ))}
+              </select>
+            </div>
+          )}
 
           {/* Quantity Selector */}
           <div className="flex items-center gap-4 mb-6">
@@ -118,10 +167,16 @@ const ProductDetailsPage = () => {
 
           {/* Action Buttons */}
           <div className="flex flex-wrap gap-4">
-            <button className="bg-green-500 hover:bg-green-600 text-white px-6 py-2 rounded-md">
+            <button
+              className="bg-green-500 hover:bg-green-600 text-white px-6 py-2 rounded-md"
+              disabled={!selectedSize}
+            >
               Buy Now
             </button>
-            <button className="bg-blue-500 hover:bg-blue-600 text-white px-6 py-2 rounded-md">
+            <button
+              className="bg-blue-500 hover:bg-blue-600 text-white px-6 py-2 rounded-md"
+              disabled={!selectedSize}
+            >
               Add to Cart
             </button>
           </div>

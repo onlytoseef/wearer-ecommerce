@@ -18,6 +18,7 @@ export default function Index() {
       <Route path="/category" element={<Categories />} />
       <Route path="*" element={<NotFound />} />
       <Route path="/products/:productId" element={<ProductDetailsPage />} />
+
       {/* Updated route */}
       <Route path="/upcoming" element={<ComingSoon />} />
       <Route path="/productPage" element={<ProductsPage />} />

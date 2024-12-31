@@ -15,7 +15,7 @@ const ProductPage = () => {
   }, [dispatch]);
 
   const handleProductClick = (productId) => {
-    navigate(`/products/${productId}`);
+    navigate(`/products/${productId}`); // No changes needed here if using 'productId'
   };
 
   return (
@@ -31,6 +31,7 @@ const ProductPage = () => {
         )}
 
         {/* Error Message */}
+
         {status === "failed" && (
           <div className="text-center text-red-500">
             <p>Error fetching products: {error}</p>
