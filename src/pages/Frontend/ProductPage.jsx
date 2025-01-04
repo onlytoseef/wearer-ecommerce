@@ -15,13 +15,14 @@ const ProductPage = () => {
   }, [dispatch]);
 
   const handleProductClick = (productId) => {
-    navigate(`/products/${productId}`); // No changes needed here if using 'productId'
+    navigate(`/products/${productId}`);
   };
 
   return (
     <div className="bg-gray-100 font-monster min-h-screen">
       <div className="container mx-auto px-4 py-8">
-        <h1 className="text-3xl font-bold text-center mb-8">Our Products</h1>
+        <h1 className="text-3xl  text-center  mb-8">Our Products</h1>
+        <hr className="my-4" />
 
         {/* Loader */}
         {status === "loading" && (
@@ -44,17 +45,17 @@ const ProductPage = () => {
             {products.map((product) => (
               <motion.div
                 key={product.id}
-                className="bg-white rounded-lg shadow-lg overflow-hidden"
+                className="bg-white shadow-lg overflow-hidden"
                 whileHover={{ scale: 1.05 }}
                 transition={{ type: "spring", stiffness: 200 }}
                 onClick={() => handleProductClick(product.id)}
               >
                 {/* Product Image */}
-                <div className="h-80 cursor-pointer">
+                <div className="h-90 w-[15vw] cursor-pointer">
                   <img
                     src={product.images || "https://via.placeholder.com/150"}
                     alt={product.name}
-                    className="w-full h-full object-cover rounded-t-lg"
+                    className="w-[15vw]  h-[40vh] object-cover "
                     onError={(e) => {
                       e.target.src = "https://via.placeholder.com/150";
                     }}
@@ -69,7 +70,7 @@ const ProductPage = () => {
                 </div>
 
                 {/* Actions */}
-                <div className="p-4 flex justify-between">
+                {/* <div className="p-4 flex justify-between">
                   <Button
                     className="bg-green-500 text-white hover:bg-green-700"
                     onClick={(e) => {
@@ -88,7 +89,7 @@ const ProductPage = () => {
                   >
                     Add to Cart
                   </Button>
-                </div>
+                </div> */}
               </motion.div>
             ))}
           </div>

@@ -2,11 +2,20 @@ import React, { useState } from "react";
 import { LuUserRound } from "react-icons/lu";
 import { PiShoppingCart } from "react-icons/pi";
 import { Link, useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 import Logo from "../../assets/images/Logo/Logo.svg";
 
 export default function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const navigate = useNavigate();
+
+  // Get cart item count from Redux state
+  const cartItems = useSelector((state) => state.cart.items);
+  const cartItemCount = cartItems.reduce(
+    (total, item) => total + item.quantity,
+    0
+  );
+
   return (
     <header className="sticky text-center top-0 font-monster z-10">
       <div className="font-monster text-primary bg-secondary">
@@ -22,15 +31,13 @@ export default function Header() {
             ☰
           </button>
 
-          {/* <div className="text-2xl font-bold text-secondary font-monster flex items-center">
-            Wearers
-          </div> */}
           <img
             className="hover:cursor-pointer"
             src={Logo}
-            width={70}
+            width={40}
             onClick={() => navigate("/")}
           />
+
           {/* Navigation Links (Large screens) */}
           <nav className="hidden md:flex space-x-8 absolute left-1/2 transform -translate-x-1/2">
             <Link
@@ -61,29 +68,35 @@ export default function Header() {
 
           {/* Cart and Account Links */}
           <div className="hidden md:flex space-x-4 items-center">
-            <a
-              href="#"
-              className="text-secondary transition duration-300 ease-in-out hover:border-b-2"
+            <button
+              onClick={() => navigate("/cart")}
+              className="relative text-secondary transition duration-300 ease-in-out hover:border-b-2"
             >
               <PiShoppingCart size={20} />
-            </a>
-            <a
-              href="#"
+              {cartItemCount > 0 && (
+                <span className="absolute -top-2 -right-2 bg-secondary text-primary text-xs w-5 h-5 flex items-center justify-center rounded-full">
+                  {cartItemCount}
+                </span>
+              )}
+            </button>
+            <button
+              onClick={() => navigate("/account")}
               className="text-secondary transition duration-300 ease-in-out hover:border-b-2"
             >
               <LuUserRound size={20} />
-            </a>
+            </button>
           </div>
 
           <div className="md:hidden flex space-x-4 items-center">
-            <button
-              className="color-secondary"
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            >
+            <button className="relative" onClick={() => navigate("/cart")}>
               <PiShoppingCart color="#EBE2D0" size={20} />
+              {cartItemCount > 0 && (
+                <span className="absolute -top-2 -right-2 bg-secondary text-primary text-xs w-5 h-5 flex items-center justify-center rounded-full">
+                  {cartItemCount}
+                </span>
+              )}
             </button>
-            <button>
-              {" "}
+            <button onClick={() => navigate("/account")}>
               <LuUserRound color="#EBE2D0" size={20} />
             </button>
           </div>
@@ -99,7 +112,6 @@ export default function Header() {
               >
                 Home
               </Link>
-
               <Link
                 to="/about"
                 className="text-gray-800 text-lg font-medium"
@@ -107,21 +119,22 @@ export default function Header() {
               >
                 About
               </Link>
-              <a
-                href="#"
-                className="text-gray-800 text-lg font-medium"
-                onClick={() => setIsMobileMenuOpen(false)}
-              >
-                Contact
-              </a>
-
               <button
-                onClick={() => setIsMobileMenuOpen(false)}
-                className="mt-2"
+                onClick={() => {
+                  setIsMobileMenuOpen(false);
+                  navigate("/cart");
+                }}
+                className="text-gray-800 text-lg font-medium"
               >
                 Cart
               </button>
-              <button onClick={() => setIsMobileMenuOpen(false)}>
+              <button
+                onClick={() => {
+                  setIsMobileMenuOpen(false);
+                  navigate("/account");
+                }}
+                className="text-gray-800 text-lg font-medium"
+              >
                 Account
               </button>
             </nav>

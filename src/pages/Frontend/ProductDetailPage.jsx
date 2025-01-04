@@ -2,17 +2,41 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { motion } from "framer-motion";
 import { doc, getDoc } from "firebase/firestore";
-import { Spin, Alert } from "antd";
+import { Spin, Alert, message } from "antd";
 import { firestore } from "../../config/firebase";
+import { useDispatch } from "react-redux";
+import { addItemToCart } from "../../store/features/cartSlice";
 
 const ProductDetailsPage = () => {
-  const { productId } = useParams(); // Ensure productId is correctly derived from the URL
+  const { productId } = useParams();
   const [product, setProduct] = useState(null);
   const [quantity, setQuantity] = useState(1);
   const [selectedSize, setSelectedSize] = useState("");
   const [activeImage, setActiveImage] = useState("");
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+
+  const dispatch = useDispatch();
+
+  const handleAddToCart = () => {
+    if (!selectedSize) {
+      message.warning("Please select a size before adding to cart.");
+      return;
+    }
+
+    dispatch(
+      addItemToCart({
+        id: productId,
+        name: product.name,
+        price: product.price,
+        image: activeImage || product.images[0],
+        quantity,
+        size: selectedSize,
+      })
+    );
+
+    message.success("Item added to Cart");
+  };
 
   useEffect(() => {
     if (!productId) {
@@ -28,10 +52,9 @@ const ProductDetailsPage = () => {
 
         if (docSnap.exists()) {
           const productData = docSnap.data();
-          const imagesArray = productData.images?.split(",") || []; // Convert images string to array
-          productData.images = imagesArray; // Update productData with the array
+          productData.images = productData.images?.split(",") || [];
           setProduct(productData);
-          setActiveImage(imagesArray[0] || ""); // Set the first image as default
+          setActiveImage(productData.images[0] || "");
         } else {
           setError("Product not found. Please ensure the product exists.");
         }
@@ -74,19 +97,18 @@ const ProductDetailsPage = () => {
   }
 
   return (
-    <div className="container font-monster mx-auto p-6">
+    <div className="container mx-auto p-6">
       <div className="flex flex-col lg:flex-row gap-8">
-        {/* Images Section */}
         <motion.div
           className="flex flex-col items-center lg:w-1/2"
           initial={{ opacity: 0, x: -50 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.5 }}
         >
-          <div className="border border-gray-200 rounded-lg overflow-hidden mb-4">
+          <div className="border rounded-lg overflow-hidden mb-4">
             <img
               src={activeImage || "https://via.placeholder.com/400"}
-              alt={product.name || "Product Image"}
+              alt={product.name}
               className="w-full h-96 object-cover rounded-lg"
               onError={(e) =>
                 (e.target.src = "https://via.placeholder.com/400")
@@ -94,15 +116,14 @@ const ProductDetailsPage = () => {
             />
           </div>
 
-          {/* Image Thumbnails */}
           <div className="flex gap-2">
-            {product.images?.map((img, index) => (
+            {product.images.map((img, index) => (
               <img
                 key={index}
                 src={img}
                 alt={`Thumbnail ${index}`}
                 onClick={() => setActiveImage(img)}
-                className={`w-20 h-20 object-cover border-2 rounded-lg cursor-pointer ${
+                className={`w-20 h-20 border-2 rounded-lg cursor-pointer ${
                   activeImage === img ? "border-blue-500" : "border-gray-200"
                 }`}
               />
@@ -110,41 +131,29 @@ const ProductDetailsPage = () => {
           </div>
         </motion.div>
 
-        {/* Product Details Section */}
         <motion.div
           className="lg:w-1/2"
           initial={{ opacity: 0, x: 50 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.5 }}
         >
-          <h1 className="text-3xl text-center font-[400] font-secondary mb-4">
-            {product.name || "N/A"}
-          </h1>
-          <p className=" font-semibold text-center text-green-600 mb-6">
-            Rs.{product.price || "0.00"}
-          </p>
-          <hr />
-          <p className="mt-2 font-secondary text-lg ">Product Description :</p>
-          <p className=" text-gray-600 mb-6">
-            {product.description || "No description available."}
-          </p>
+          <h1 className="text-3xl font-semibold mb-4">{product.name}</h1>
+          <p className="text-green-600 text-lg mb-6">Rs. {product.price}</p>
+          <p>{product.description}</p>
 
-          {/* Size Selector */}
           {product.sizes?.length > 0 && (
-            <div className="mb-6">
-              <label className="block text-lg font-medium mb-2">
-                Select Size:
-              </label>
+            <div className="my-4">
+              <label className="block mb-2">Select Size:</label>
               <select
                 value={selectedSize}
                 onChange={handleSizeSelect}
-                className="border border-gray-300 rounded-md px-4 py-2 w-full"
+                className="border rounded-md p-2"
               >
                 <option value="" disabled>
                   Choose a size
                 </option>
-                {product.sizes.map((size, index) => (
-                  <option key={index} value={size}>
+                {product.sizes.map((size) => (
+                  <option key={size} value={size}>
                     {size}
                   </option>
                 ))}
@@ -152,35 +161,14 @@ const ProductDetailsPage = () => {
             </div>
           )}
 
-          {/* Quantity Selector */}
-          <div className="flex items-center gap-4 mb-6">
-            <button
-              className="bg-gray-200 hover:bg-gray-300 text-lg px-4 py-2 rounded-md"
-              onClick={handleDecrement}
-            >
-              -
-            </button>
-            <span className="text-lg font-semibold">{quantity}</span>
-            <button
-              className="bg-gray-200 hover:bg-gray-300 text-lg px-4 py-2 rounded-md"
-              onClick={handleIncrement}
-            >
-              +
-            </button>
+          <div className="my-4 flex items-center">
+            <button onClick={handleDecrement}>-</button>
+            <span>{quantity}</span>
+            <button onClick={handleIncrement}>+</button>
           </div>
 
-          {/* Action Buttons */}
-          <div className="flex flex-wrap gap-4">
-            <button
-              className="bg-green-500 hover:bg-green-600 text-white px-6 py-2 rounded-md"
-              disabled={!selectedSize}
-            >
-              Buy Now
-            </button>
-            <button
-              className="bg-blue-500 hover:bg-blue-600 text-white px-6 py-2 rounded-md"
-              disabled={!selectedSize}
-            >
+          <div>
+            <button onClick={handleAddToCart} className="btn-primary">
               Add to Cart
             </button>
           </div>
