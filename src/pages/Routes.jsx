@@ -26,7 +26,7 @@ function Index() {
           />
 
           <Route path="/*" element={<Frontend />} />
-
+          
           <Route path="/auth/*" element={<Auth />} />
 
           <Route

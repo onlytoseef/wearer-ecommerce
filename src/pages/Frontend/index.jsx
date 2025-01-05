@@ -9,6 +9,7 @@ import ComingSoon from "./ComingSoon";
 import ProductsPage from "./ProductPage";
 import ProductDetailsPage from "./ProductDetailPage";
 import CartPage from "./CartPage";
+import JazzCashForm from "./JazzCashForm";
 
 export default function Index() {
   return (
@@ -20,7 +21,7 @@ export default function Index() {
       <Route path="*" element={<NotFound />} />
       <Route path="/cart" element={<CartPage />} />
       <Route path="/products/:productId" element={<ProductDetailsPage />} />
-
+      <Route path="/jazz-form" element={<JazzCashForm />} />
       {/* Updated route */}
       <Route path="/upcoming" element={<ComingSoon />} />
       <Route path="/productPage" element={<ProductsPage />} />
