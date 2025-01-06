@@ -137,9 +137,15 @@ const ProductDetailsPage = () => {
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.5 }}
         >
-          <h1 className="text-3xl font-semibold mb-4">{product.name}</h1>
-          <p className="text-green-600 text-lg mb-6">Rs. {product.price}</p>
-          <p>{product.description}</p>
+          <h1 className="text-3xl text-primary font-semibold font-monster mb-4">
+            {product.name}
+          </h1>
+          <p className=" text-primary font-monster text-lg mb-6">
+            Rs. {product.price}
+          </p>
+          <hr />
+          <p className="font-monster mt-2">Descriptions</p>
+          <p className="text-gray-600"> {product.description}</p>
 
           {product.sizes?.length > 0 && (
             <div className="my-4">

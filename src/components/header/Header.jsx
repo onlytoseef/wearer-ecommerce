@@ -59,10 +59,10 @@ export default function Header() {
               About
             </Link>
             <Link
-              to="/terms"
+              to="/contact"
               className="text-secondary transition duration-300 ease-in-out hover:border-b-2"
             >
-              Return/Exchange
+              Contact Us
             </Link>
           </nav>
 
