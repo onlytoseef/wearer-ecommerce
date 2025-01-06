@@ -10,10 +10,10 @@ const JazzCashForm = () => {
   const [formData, setFormData] = useState({
     pp_Version: "1.1",
     pp_TxnType: "",
-    pp_MerchantID: "MC147332", // Provided Merchant ID
+    pp_MerchantID: "MC147195", // Provided Merchant ID
     pp_Language: "EN",
     pp_SubMerchantID: "",
-    pp_Password: "s0v2t02t07", // Provided Password
+    pp_Password: "0wcv36y4g8", // Provided Password
     pp_TxnRefNo: generateTxnRefNo(), // Unique transaction reference
     pp_Amount: "10000", // Amount in paisas (e.g., Rs. 100 = 10000 paisas)
     pp_DiscountedAmount: "",
@@ -42,7 +42,7 @@ const JazzCashForm = () => {
 
   const [hashString, setHashString] = useState(""); // Store hash string for debugging
 
-  const integritySalt = "9y78guze04"; // Provided Integrity Salt
+  const integritySalt = "w44szw2hs8"; // Provided Integrity Salt
 
   const calculateHash = () => {
     let hashString = `${integritySalt}&`;

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 const TransactionResult = () => {
   const location = useLocation();
@@ -87,7 +87,9 @@ const TransactionResult = () => {
           </div>
           <div className="flex justify-between">
             <span className="font-medium">Amount:</span>
-            <span>Rs. {(transactionDetails.amount / 100).toFixed(2) || "N/A"}</span>
+            <span>
+              Rs. {(transactionDetails.amount / 100).toFixed(2) || "N/A"}
+            </span>
           </div>
           <div className="flex justify-between">
             <span className="font-medium">Bill Reference:</span>
@@ -111,12 +113,12 @@ const TransactionResult = () => {
               Please visit the payment counter to complete your payment.
             </p>
           ) : (
-            <a
-              href="/retry-payment"
+            <Link
+              to="/jazz-form"
               className="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition"
             >
               Retry Payment
-            </a>
+            </Link>
           )}
         </div>
       </div>
