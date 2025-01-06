@@ -50,16 +50,23 @@ const About = () => {
               <span className="text-[#425652]">US</span>
             </h1>
             <div className="font-secondary text-center sm:text-left md:-ml-10 p-5">
-              <p className="text-lg text-primary leading-relaxed">
-                Hackney started as a small interior design firm in downtown
-                Michigan, aiming to help home buyers make the most of their
-                newly acquired spaces. We soon realized the value of helping
-                clients envision what lies beyond their walls and floor plans.
+              <p className="text-lg text-gray-700 leading-relaxed">
+                At Wearers, we believe that clothing is more than just
+                fabric—it's a way to express individuality, confidence, and
+                creativity. Founded with the mission to redefine modern fashion,
+                Wearers is a clothing brand that blends timeless designs with
+                contemporary aesthetics to create outfits that empower you.
               </p>
-              <p className="text-lg text-primary leading-relaxed mt-4">
-                Today, we offer tailored interior design, architecture, and
-                realtor services. Our goal is to exceed customer expectations
-                with seamless and personalized solutions.
+              <p className="text-lg text-gray-700 leading-relaxed mt-4">
+                Wearers was born from a simple idea: to create high-quality,
+                stylish, and versatile clothing that fits seamlessly into every
+                lifestyle. From our humble beginnings as a small team of fashion
+                enthusiasts to becoming a trusted name in the industry, we have
+                always stayed true to our core values of innovation,
+                sustainability, and customer satisfaction. Every stitch, every
+                design, and every fabric is carefully chosen to ensure our
+                customers receive not just clothing but an experience of comfort
+                and elegance.
               </p>
             </div>
           </motion.div>
@@ -87,10 +94,10 @@ const About = () => {
         <div className="flex-col text-center">
           <img className="m-auto" src={refund} width={238} alt="Easy Refund" />
           <h1 className="text-black text-[2rem] font-secondary font-[500]">
-            Easy Refund
+            Easy Exchange
           </h1>
           <p className="text-primary font-secondary">
-            Customer can refund if find any Fault
+            Customer can Exchange if find any Fault
           </p>
         </div>
 

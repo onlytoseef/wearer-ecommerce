@@ -1,5 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
+import ContactUs from "../../assets/images/Contact/ContactUs.svg";
 
 const Contact = () => {
   return (
@@ -10,16 +11,25 @@ const Contact = () => {
         transition={{ duration: 0.8 }}
         className="text-center mb-12"
       >
-        <h1 className="text-4xl font-bold">
-          <span className="text-green-600">Contact</span> Us
+        <h1 className="sm:text-[6rem] text-primary text-[3.2rem] md:-ml-[6rem] font-monster font-extrabold ">
+          <span
+            style={{
+              WebkitTextStroke: "2px #425652",
+              color: "transparent",
+            }}
+            className="text-pri"
+          >
+            Contact
+          </span>{" "}
+          Us
         </h1>
-        <p className="mt-4 text-gray-700">
+        <p className="mt-4 font-monster text-gray-700">
           We'd love to hear from you! Feel free to reach out through any of the
           contact methods below.
         </p>
       </motion.div>
 
-      <div className="flex flex-col lg:flex-row gap-12">
+      <div className="flex flex-col font-monster lg:flex-row gap-12">
         {/* Contact Details */}
         <motion.div
           initial={{ opacity: 0, x: -50 }}
@@ -41,12 +51,14 @@ const Contact = () => {
 
           <div className="mb-4">
             <h3 className="text-lg font-bold">Phone:</h3>
-            <p className="text-gray-600">+92 300 1234567</p>
+            <p className="text-gray-600">+92 3144642896</p>
           </div>
 
           <div className="mb-4">
             <h3 className="text-lg font-bold">WhatsApp:</h3>
-            <p className="text-gray-600">+92 300 1234567</p>
+            <a target="_blank" href="https://wa.me/+923144642896">
+              +92 3144642896
+            </a>
           </div>
         </motion.div>
 
@@ -57,11 +69,7 @@ const Contact = () => {
           transition={{ duration: 0.8 }}
           className="lg:w-1/2 flex justify-center"
         >
-          <img
-            src="https://undraw.io/assets/illustrations/undraw_contact_us.svg"
-            alt="Contact Us"
-            className="w-full max-w-md"
-          />
+          <img src={ContactUs} alt="Contact Us" className="w-full max-w-md" />
         </motion.div>
       </div>
 

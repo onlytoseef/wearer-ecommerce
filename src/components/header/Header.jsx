@@ -50,7 +50,7 @@ export default function Header() {
               to="/category"
               className="text-secondary transition duration-300 ease-in-out hover:border-b-2"
             >
-              Trousers
+              Shop
             </Link>
             <Link
               to="/about"
