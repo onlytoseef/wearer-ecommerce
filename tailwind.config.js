@@ -10,6 +10,15 @@ module.exports = {
         primary: "#425652",
         secondary: "#EBE2D0",
       },
+      animation: {
+        dash: "dash 2s ease-in-out forwards",
+      },
+      keyframes: {
+        dash: {
+          from: { strokeDashoffset: "1000" },
+          to: { strokeDashoffset: "0" },
+        },
+      },
     },
   },
   plugins: [],

@@ -6,6 +6,7 @@ import { Spin, Alert, message } from "antd";
 import { firestore } from "../../config/firebase";
 import { useDispatch } from "react-redux";
 import { addItemToCart } from "../../store/features/cartSlice";
+import Loader from "../../components/Loader";
 
 const ProductDetailsPage = () => {
   const { productId } = useParams();
@@ -77,7 +78,7 @@ const ProductDetailsPage = () => {
   if (loading) {
     return (
       <div className="flex justify-center items-center min-h-screen">
-        <Spin size="large" tip="Loading product details..." />
+        <Loader />
       </div>
     );
   }

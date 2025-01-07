@@ -40,3 +40,6 @@
 .ant-menu-item-selected .anticon {
   color: #425652 !important; /* Blue icon color for selected item */
 }
+html {
+  scroll-behavior: smooth;
+}
