@@ -1,6 +1,6 @@
 import React from "react";
-import blackhoodie from "../../assets/images/product/whiteHoodieFront.svg";
-import whitehoodie from "../../assets/images/product/BlackHoodieBack.svg";
+import BlackHoodie from "../../assets/images/product/WhiteHoodieFront.svg";
+import WhiteHoodie from "../../assets/images/product/BlackHoodieBack.svg";
 import { motion } from "framer-motion";
 
 const FeaturedSection = () => {
@@ -16,7 +16,7 @@ const FeaturedSection = () => {
             transition={{ duration: 0.8 }}
             className="lg:w-1/2 flex justify-center"
           >
-            <img src={blackhoodie} alt="" />
+            <img src={BlackHoodie} alt="" />
           </motion.div>
           <motion.div
             initial={{ opacity: 0, y: 50 }}
@@ -46,7 +46,7 @@ const FeaturedSection = () => {
             transition={{ duration: 0.8 }}
             className="lg:w-1/2 flex justify-center"
           >
-            <img src={whitehoodie} alt="" />
+            <img src={WhiteHoodie} alt="" />
           </motion.div>
         </div>
       </div>
