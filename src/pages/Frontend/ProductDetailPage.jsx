@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { doc, getDoc } from "firebase/firestore";
-import { Spin, Alert, message } from "antd";
+import { message } from "antd";
 import { firestore } from "../../config/firebase";
 import { useDispatch } from "react-redux";
 import { addItemToCart } from "../../store/features/cartSlice";
@@ -10,6 +10,7 @@ import Loader from "../../components/Loader";
 
 const ProductDetailsPage = () => {
   const { productId } = useParams();
+  const navigate = useNavigate();
   const [product, setProduct] = useState(null);
   const [quantity, setQuantity] = useState(1);
   const [selectedSize, setSelectedSize] = useState("");
@@ -39,13 +40,25 @@ const ProductDetailsPage = () => {
     message.success("Item added to Cart");
   };
 
-  useEffect(() => {
-    if (!productId) {
-      setError("Invalid product ID. Please check the URL.");
-      setLoading(false);
+  const handleBuyNow = () => {
+    if (!selectedSize) {
+      message.warning("Please select a size before proceeding to buy.");
       return;
     }
 
+    const productOrder = {
+      id: productId,
+      name: product.name,
+      price: product.price,
+      image: activeImage || product.images[0],
+      quantity,
+      size: selectedSize,
+    };
+
+    navigate("/user-details", { state: { productOrder } });
+  };
+
+  useEffect(() => {
     const fetchProduct = async () => {
       try {
         const docRef = doc(firestore, "products", productId);
@@ -57,11 +70,10 @@ const ProductDetailsPage = () => {
           setProduct(productData);
           setActiveImage(productData.images[0] || "");
         } else {
-          setError("Product not found. Please ensure the product exists.");
+          setError("Product not found.");
         }
       } catch (err) {
         setError("An error occurred while fetching the product.");
-        console.error("Fetch Error:", err);
       } finally {
         setLoading(false);
       }
@@ -73,7 +85,8 @@ const ProductDetailsPage = () => {
   const handleIncrement = () => setQuantity((prev) => prev + 1);
   const handleDecrement = () =>
     setQuantity((prev) => (prev > 1 ? prev - 1 : 1));
-  const handleSizeSelect = (e) => setSelectedSize(e.target.value);
+
+  const handleSizeSelect = (size) => setSelectedSize(size);
 
   if (loading) {
     return (
@@ -86,13 +99,7 @@ const ProductDetailsPage = () => {
   if (error) {
     return (
       <div className="flex justify-center items-center min-h-screen">
-        <Alert
-          message="Error"
-          description={error}
-          type="error"
-          showIcon
-          className="max-w-lg w-full"
-        />
+        <div className="text-red-500">{error}</div>
       </div>
     );
   }
@@ -110,13 +117,9 @@ const ProductDetailsPage = () => {
             <img
               src={activeImage || "https://via.placeholder.com/400"}
               alt={product.name}
-              className="w-full h-96 object-cover rounded-lg"
-              onError={(e) =>
-                (e.target.src = "https://via.placeholder.com/400")
-              }
+              className="w-full h-96 object-cover"
             />
           </div>
-
           <div className="flex gap-2">
             {product.images.map((img, index) => (
               <img
@@ -133,50 +136,70 @@ const ProductDetailsPage = () => {
         </motion.div>
 
         <motion.div
-          className="lg:w-1/2"
+          className="lg:w-1/2 font-monster"
           initial={{ opacity: 0, x: 50 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.5 }}
         >
-          <h1 className="text-3xl text-primary font-semibold font-monster mb-4">
+          <h1 className="text-3xl font-monster font-bold mb-4">
             {product.name}
           </h1>
-          <p className=" text-primary font-monster text-lg mb-6">
-            Rs. {product.price}
-          </p>
+          <p className="text-xl text-gray-800 mb-6">Rs. {product.price}</p>
           <hr />
-          <p className="font-monster mt-2">Descriptions</p>
-          <p className="text-gray-600"> {product.description}</p>
+          <p className="mt-4 text-gray-600">{product.description}</p>
 
           {product.sizes?.length > 0 && (
-            <div className="my-4">
-              <label className="block mb-2">Select Size:</label>
-              <select
-                value={selectedSize}
-                onChange={handleSizeSelect}
-                className="border rounded-md p-2"
-              >
-                <option value="" disabled>
-                  Choose a size
-                </option>
+            <div className="mt-6">
+              <h4 className="mb-2 font-medium">Available Size:</h4>
+              <div className="flex flex-wrap gap-2">
                 {product.sizes.map((size) => (
-                  <option key={size} value={size}>
+                  <button
+                    key={size}
+                    onClick={() => handleSizeSelect(size)}
+                    className={`px-4 py-2 border rounded-md text-xs font-medium ${
+                      selectedSize === size
+                        ? "bg-secondary text-primary border-primary"
+                        : "border-primary"
+                    }`}
+                  >
                     {size}
-                  </option>
+                  </button>
                 ))}
-              </select>
+              </div>
             </div>
           )}
 
-          <div className="my-4 flex items-center">
-            <button onClick={handleDecrement}>-</button>
-            <span>{quantity}</span>
-            <button onClick={handleIncrement}>+</button>
+          <div className="mt-6">
+            <h4 className="mb-2 font-medium">Quantity:</h4>
+            <div className="flex border-black items-center gap-2">
+              <button
+                onClick={handleDecrement}
+                className="px-3 py-1 border rounded-md bg-gray-200"
+              >
+                -
+              </button>
+              <span>{quantity}</span>
+              <button
+                onClick={handleIncrement}
+                className="px-3 py-1 border rounded-md bg-gray-200"
+              >
+                +
+              </button>
+            </div>
           </div>
 
-          <div>
-            <button onClick={handleAddToCart} className="btn-primary">
+          <div className="flex gap-4 mt-6">
+            <button
+              onClick={handleAddToCart}
+              className="flex-1 py-3 bg-blue-500 text-white font-medium rounded-md"
+            >
               Add to Cart
+            </button>
+            <button
+              onClick={handleBuyNow}
+              className="flex-1 py-3 bg-green-500 text-white font-medium rounded-md"
+            >
+              Buy Now
             </button>
           </div>
         </motion.div>

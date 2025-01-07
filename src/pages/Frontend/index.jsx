@@ -12,6 +12,8 @@ import JazzCashForm from "./JazzCashForm";
 import TransactionResult from "./TransactionResult";
 import Contact from "./Contact";
 import ScrollToTop from "../../components/ScrollToTop";
+import UserDetails from "./UserDetails";
+import TrackOrder from "./TrackOrder";
 
 export default function Index() {
   return (
@@ -19,6 +21,8 @@ export default function Index() {
       <ScrollToTop />
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/user-details" element={<UserDetails />} />
+        <Route path="/track-order/:orderNumber" element={<TrackOrder />} />
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/category" element={<Categories />} />
