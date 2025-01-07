@@ -7,29 +7,25 @@ const categories = [
   {
     id: 1,
     title: "Track Suits",
-    image:
-      "https://plus.unsplash.com/premium_photo-1689371958614-cd30635630ef?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    image: "https://cdn-icons-png.flaticon.com/256/15409/15409235.png",
     link: "/productPage",
   },
   {
     id: 2,
     title: "Hoodie",
-    image:
-      "https://images.unsplash.com/photo-1616430286685-d11d259848b9?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    image: "https://cdn-icons-png.flaticon.com/256/6241/6241670.png",
     link: "/upcoming",
   },
   {
     id: 3,
     title: "T-Shirts",
-    image:
-      "https://plus.unsplash.com/premium_photo-1673125287084-e90996bad505?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    image: "https://cdn-icons-png.flaticon.com/256/3793/3793341.png",
     link: "/upcoming",
   },
   {
     id: 4,
     title: "Caps",
-    image:
-      "https://plus.unsplash.com/premium_photo-1675989087109-f8a00bfea7d1?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    image: "https://cdn-icons-png.flaticon.com/256/2806/2806254.png",
     link: "/upcoming",
   },
 ];
