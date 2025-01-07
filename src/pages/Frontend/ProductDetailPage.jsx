@@ -197,7 +197,7 @@ const ProductDetailsPage = () => {
             </button>
             <button
               onClick={handleBuyNow}
-              className="flex-1 py-3 bg-green-500 text-white font-medium rounded-md"
+              className="flex-1 py-3 bg-primary text-white font-medium rounded-md"
             >
               Buy Now
             </button>
