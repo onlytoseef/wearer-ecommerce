@@ -107,6 +107,7 @@ const ProductDetailsPage = () => {
   return (
     <div className="container mx-auto p-6">
       <div className="flex flex-col lg:flex-row gap-8">
+        {/* Product Images Section */}
         <motion.div
           className="flex flex-col items-center lg:w-1/2"
           initial={{ opacity: 0, x: -50 }}
@@ -135,6 +136,7 @@ const ProductDetailsPage = () => {
           </div>
         </motion.div>
 
+        {/* Product Details Section */}
         <motion.div
           className="lg:w-1/2 font-monster"
           initial={{ opacity: 0, x: 50 }}

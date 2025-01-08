@@ -1,27 +1,26 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { doc, getDoc, getDocs, collection } from "firebase/firestore";
-import { firestore } from "../../config/firebase"; // Import firestore
+import { doc, setDoc, getDocs, collection } from "firebase/firestore";
+import { firestore } from "../../config/firebase";
 
 const initialState = {
-  orders: {}, // Ensure it's an empty object initially
+  orders: {}, // Store orders as an object
   loading: false,
   error: null,
 };
 
-// Async action to place order and store in Firestore
+// Async action to place order in Firestore
 export const placeOrderAsync = createAsyncThunk(
   "order/placeOrderAsync",
   async (orderData, { rejectWithValue }) => {
     try {
-      const orderNumber = Math.random().toString(36).substr(2, 9); // Generate random order number
-      const orderRef = doc(firestore, "orders", orderNumber);
+      const orderNumber = Math.floor(100000 + Math.random() * 900000);
+      const orderRef = doc(firestore, "orders", orderNumber.toString());
       await setDoc(orderRef, {
         ...orderData,
         orderNumber,
-        status: "placed", // Default status is "placed"
+        status: "placed",
       });
-
-      return { orderNumber, orderData }; // Return order number and order data
+      return { orderNumber, orderData };
     } catch (error) {
       return rejectWithValue(error.message);
     }
@@ -39,7 +38,7 @@ export const getOrders = createAsyncThunk(
       querySnapshot.forEach((doc) => {
         orders[doc.id] = doc.data();
       });
-      return orders; // Return all orders
+      return orders;
     } catch (error) {
       return rejectWithValue(error.message);
     }
@@ -76,7 +75,7 @@ const orderSlice = createSlice({
       })
       .addCase(getOrders.fulfilled, (state, action) => {
         state.loading = false;
-        state.orders = action.payload; // Set orders in Redux store
+        state.orders = action.payload;
       })
       .addCase(getOrders.rejected, (state, action) => {
         state.loading = false;
@@ -86,5 +85,4 @@ const orderSlice = createSlice({
 });
 
 export const { updateOrderStatus } = orderSlice.actions;
-
 export default orderSlice.reducer;

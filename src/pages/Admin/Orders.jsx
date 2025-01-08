@@ -1,4 +1,4 @@
-import { Table, Select, Button, message } from "antd";
+import { Table, Select, message } from "antd";
 import { useEffect, useState } from "react";
 import { getOrders, updateOrderStatus } from "../../store/features/orderSlice"; // Adjust your slice paths accordingly
 import { useDispatch, useSelector } from "react-redux";
@@ -41,10 +41,6 @@ const Orders = () => {
 
       // Dispatch action to update status in Redux store
       dispatch(updateOrderStatus({ orderNumber, status }));
-      console.log(
-        "User Details:",
-        orders[orderNumber]?.userDetails || "NO DETAILS"
-      );
       message.success("Order status updated successfully");
     } catch (error) {
       message.error("Failed to update order status");
@@ -57,13 +53,21 @@ const Orders = () => {
       ? Object.keys(orders).map((orderNumber) => ({
           key: orderNumber,
           orderNumber,
-          userDetails: orders[orderNumber].userDetails || {},
-          items: orders[orderNumber].items, // Array of products
-          totalPrice: orders[orderNumber].items.reduce(
-            (total, item) =>
-              total + item.productOrder.price * item.productOrder.quantity,
-            0
-          ), // Calculate total price
+          userDetails: {
+            firstName: orders[orderNumber].firstName,
+            lastName: orders[orderNumber].lastName,
+            email: orders[orderNumber].email,
+            phone: orders[orderNumber].phone,
+            address: orders[orderNumber].address,
+            city: orders[orderNumber].city,
+          },
+          items: orders[orderNumber].product
+            ? [orders[orderNumber].product]
+            : [],
+          totalPrice: (orders[orderNumber].product
+            ? [orders[orderNumber].product]
+            : []
+          ).reduce((total, item) => total + item.price * item.quantity, 0), // Calculate total price safely
           status: orders[orderNumber].status,
         }))
       : [];
@@ -77,7 +81,9 @@ const Orders = () => {
     {
       title: "Customer Name",
       key: "customerName",
-      render: (text, record) => record.userDetails?.name || "N/A",
+      render: (text, record) =>
+        `${record.userDetails.firstName} ${record.userDetails.lastName}` ||
+        "N/A",
     },
     {
       title: "Email",
@@ -95,17 +101,25 @@ const Orders = () => {
       render: (text, record) => record.userDetails?.address || "N/A",
     },
     {
+      title: "City",
+      key: "city",
+      render: (text, record) => record.userDetails?.city || "N/A",
+    },
+    {
       title: "Product(s)",
       key: "items",
       render: (text, record) => (
         <div>
-          {record.items.map((item, index) => (
-            <div key={index}>
-              <span>{item.productOrder.name}</span> -{" "}
-              <span>${item.productOrder.price}</span> x{" "}
-              <span>{item.productOrder.quantity}</span>
-            </div>
-          ))}
+          {record.items && record.items.length > 0 ? (
+            record.items.map((item, index) => (
+              <div key={index}>
+                <span>{item.name}</span> - <span>Rs.{item.price}</span> x{" "}
+                <span>{item.quantity}</span>
+              </div>
+            ))
+          ) : (
+            <span>No products</span>
+          )}
         </div>
       ),
     },
@@ -134,7 +148,10 @@ const Orders = () => {
 
   return (
     <div className="p-6">
-      <h2 className="text-2xl font-semibold mb-4">Admin Order Management</h2>
+      <h2 className="text-2xl font-monster text-center  font-semibold mb-4">
+        Admin Order Management
+      </h2>
+      <hr />
       <Table
         columns={columns}
         dataSource={dataSource}

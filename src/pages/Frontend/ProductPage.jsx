@@ -32,12 +32,10 @@ const ProductPage = () => {
         <hr className="mb-8" />
 
         <div>
-          {/* Filters Section */}
-
           {/* Products Section */}
           <div className="w-full">
             {status === "loading" && (
-              <div className="flex justify-center ">
+              <div className="flex justify-center">
                 <Loader />
               </div>
             )}
@@ -49,74 +47,33 @@ const ProductPage = () => {
             )}
 
             {status === "succeeded" && (
-              <div className="flex flex-col lg:flex-row">
-                <div className="w-full lg:w-1/4 pr-8 mb-8 lg:mb-0">
-                  <h2 className="text-2xl font-medium mb-4">Filters</h2>
-                  <div className="mb-6">
-                    <h3 className="text-lg font-semibold mb-2">Availability</h3>
-                    <ul>
-                      <li className="mb-2">
-                        <input type="checkbox" id="inStock" />
-                        <label htmlFor="inStock" className="ml-2">
-                          In Stock
-                        </label>
-                      </li>
-                      <li>
-                        <input type="checkbox" id="outStock" />
-                        <label htmlFor="outStock" className="ml-2">
-                          Out of Stock
-                        </label>
-                      </li>
-                    </ul>
-                  </div>
-                  <div className="mb-6">
-                    <h3 className="text-lg font-semibold mb-2">Price</h3>
-                    <ul>
-                      <li className="mb-2">
-                        <input type="radio" id="lowToHigh" name="price" />
-                        <label htmlFor="lowToHigh" className="ml-2">
-                          Low to High
-                        </label>
-                      </li>
-                      <li>
-                        <input type="radio" id="highToLow" name="price" />
-                        <label htmlFor="highToLow" className="ml-2">
-                          High to Low
-                        </label>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-                <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-4 gap-8">
-                  {products.map((product) => (
-                    <motion.div
-                      key={product.id}
-                      className="bg-white shadow-lg rounded-md overflow-hidden transition-all hover:shadow-xl cursor-pointer"
-                      whileHover={{ scale: 1.05 }}
-                      onClick={() => handleProductClick(product.id)}
-                    >
-                      {/* Product Image */}
-                      <img
-                        src={
-                          product.images || "https://via.placeholder.com/150"
-                        }
-                        alt={product.name}
-                        className="w-full h-48 object-cover"
-                        onError={(e) => {
-                          e.target.src = "https://via.placeholder.com/150";
-                        }}
-                      />
+              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-5 gap-6">
+                {products.map((product) => (
+                  <motion.div
+                    key={product.id}
+                    className="bg-white shadow-lg rounded-md overflow-hidden transition-all hover:shadow-xl cursor-pointer"
+                    whileHover={{ scale: 1.05 }}
+                    onClick={() => handleProductClick(product.id)}
+                  >
+                    {/* Product Image */}
+                    <img
+                      src={product.images || "https://via.placeholder.com/150"}
+                      alt={product.name}
+                      className="w-full h-90 object-cover"
+                      onError={(e) => {
+                        e.target.src = "https://via.placeholder.com/150";
+                      }}
+                    />
 
-                      {/* Product Details */}
-                      <div className="p-4 text-center">
-                        <h3 className="text-lg font-medium">{product.name}</h3>
-                        <p className="text-green-600 font-bold">
-                          Rs.{product.price}
-                        </p>
-                      </div>
-                    </motion.div>
-                  ))}
-                </div>
+                    {/* Product Details */}
+                    <div className="p-6 text-center">
+                      <h3 className="text-xl font-medium">{product.name}</h3>
+                      <p className="text-green-600 font-bold text-lg">
+                        Rs.{product.price}
+                      </p>
+                    </div>
+                  </motion.div>
+                ))}
               </div>
             )}
           </div>

@@ -12,8 +12,9 @@ import JazzCashForm from "./JazzCashForm";
 import TransactionResult from "./TransactionResult";
 import Contact from "./Contact";
 import ScrollToTop from "../../components/ScrollToTop";
-import UserDetails from "./UserDetails";
 import TrackOrder from "./TrackOrder";
+import OrderSuccess from "./OrderSuccess";
+import UserDetails from "./UserDetails";
 
 export default function Index() {
   return (
@@ -22,6 +23,8 @@ export default function Index() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/user-details" element={<UserDetails />} />
+        <Route path="/order-success:orderNumber" element={<OrderSuccess />} />
+
         <Route path="/track-order/:orderNumber" element={<TrackOrder />} />
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />

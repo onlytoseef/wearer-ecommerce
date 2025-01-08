@@ -6,26 +6,30 @@ import { useNavigate } from "react-router-dom";
 const categories = [
   {
     id: 1,
-    title: "Track Suits",
-    image: "https://cdn-icons-png.flaticon.com/256/15409/15409235.png",
+    title: "",
+    image:
+      "https://i.pinimg.com/736x/be/9b/4b/be9b4b2dba47b9ff50d14885b7f5b15c.jpg",
     link: "/productPage",
   },
   {
     id: 2,
-    title: "Hoodie",
-    image: "https://cdn-icons-png.flaticon.com/256/6241/6241670.png",
+    title: "",
+    image:
+      "https://i.pinimg.com/736x/e8/33/3a/e8333a5e0f6061ce2403a3fc7598bbaa.jpg",
     link: "/upcoming",
   },
   {
     id: 3,
-    title: "T-Shirts",
-    image: "https://cdn-icons-png.flaticon.com/256/3793/3793341.png",
+    title: "",
+    image:
+      "https://i.pinimg.com/736x/98/a1/3f/98a13f3db7841e8eef7d21060e7b51f7.jpg",
     link: "/upcoming",
   },
   {
     id: 4,
-    title: "Caps",
-    image: "https://cdn-icons-png.flaticon.com/256/2806/2806254.png",
+    title: "",
+    image:
+      "https://i.pinimg.com/736x/bf/a2/d0/bfa2d04056745a98795f59c791166f36.jpg",
     link: "/upcoming",
   },
 ];

@@ -6,23 +6,13 @@ import "tailwindcss/tailwind.css";
 const slides = [
   {
     image:
-      "https://plus.unsplash.com/premium_photo-1672883552126-a3f99dab08e7?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "https://i.pinimg.com/1200x/57/c1/9c/57c19c54ee1f91ff42b65a1699c11bc7.jpg",
     text: "Discover the latest fashion trends",
   },
   {
     image:
-      "https://plus.unsplash.com/premium_photo-1672883552126-a3f99dab08e7?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    text: "Style that speaks for itself",
-  },
-  {
-    image:
-      "https://plus.unsplash.com/premium_photo-1672883552126-a3f99dab08e7?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    text: "Elegance in every stitch",
-  },
-  {
-    image:
-      "https://plus.unsplash.com/premium_photo-1672883552126-a3f99dab08e7?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    text: "Unleash your unique style",
+      "https://i.pinimg.com/1200x/57/c1/9c/57c19c54ee1f91ff42b65a1699c11bc7.jpg",
+    text: "40% OFF FOR NOW",
   },
 ];
 

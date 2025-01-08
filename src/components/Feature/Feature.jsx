@@ -7,8 +7,10 @@ const FeaturedSection = () => {
   return (
     <section className="bg-gray-100 py-16">
       <div className="container mx-auto px-6 text-center">
-        <h2 className="text-3xl font-bold mb-6">Featured Products</h2>
-
+        <div className="text-center py-5 font-secondary text-[3rem]  font-[450] sm:text-[3rem]">
+          Featured Products
+        </div>
+        <hr />
         <div className="flex sm:flex-row flex-col items-center justify-between">
           <motion.div
             initial={{ opacity: 0, x: 50 }}
