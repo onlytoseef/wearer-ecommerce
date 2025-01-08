@@ -238,6 +238,15 @@ const AddProduct = () => {
           >
             <InputNumber min={1} style={{ width: "100%" }} />
           </Form.Item>
+          <Form.Item
+            name="originalPrice"
+            label="Original Price"
+            rules={[
+              { required: true, message: "Please enter Orignal Product Price" },
+            ]}
+          >
+            <InputNumber min={1} style={{ width: "100%" }} />
+          </Form.Item>
 
           <Form.Item
             name="sizes"

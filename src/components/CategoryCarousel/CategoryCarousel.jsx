@@ -58,11 +58,14 @@ const CategoryCarousel = () => {
             whileTap={{ scale: 0.9 }}
             onClick={() => handleCategoryClick(category.link)}
           >
-            <div className="absolute inset-0 rounded-full py-5">
+            <div className="absolute inset-0 rounded-full overflow-hidden">
+              {" "}
+              {/* Added overflow-hidden here */}
               <img
                 src={category.image}
                 alt={category.title}
                 className="w-full h-full object-cover"
+                style={{ aspectRatio: "1/1" }} // Added aspect ratio here
               />
             </div>
             <h3 className="text-xl font-semibold text-white z-10">

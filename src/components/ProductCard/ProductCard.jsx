@@ -36,36 +36,45 @@ const ProductCard = () => {
             )}
 
             {status === "succeeded" && (
-              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-5 gap-6">
+              <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-5 gap-6">
                 {products.map((product) => (
                   <motion.div
                     key={product.id}
-                    className="bg-white shadow-lg rounded-md overflow-hidden transition-all hover:shadow-xl cursor-pointer"
-                    whileHover={{ scale: 1.05 }}
+                    className="bg-white shadow-lg rounded-md overflow-hidden transition-all cursor-pointer"
                     onClick={() => handleProductClick(product.id)}
                   >
-                    <div className="absolute top-2 left-2 bg-green-600 text-white text-xs font-bold px-2 py-1 rounded-md">
-                      SAVE 40%
+                    <div className="relative">
+                      <img
+                        src={
+                          Array.isArray(product.images)
+                            ? product.images[0]
+                            : product.images.includes(",")
+                            ? product.images.split(",")[0].trim()
+                            : product.images ||
+                              "https://via.placeholder.com/150"
+                        }
+                        alt={product.name}
+                        className="w-full h-90 object-cover"
+                        onError={(e) => {
+                          e.target.src = "https://via.placeholder.com/150";
+                        }}
+                      />
+                      <div className="absolute top-2 left-2 bg-green-600 text-white text-xs font-bold px-2 py-1 rounded-md">
+                        SAVE 40%
+                      </div>
                     </div>
-                    <img
-                      src={
-                        Array.isArray(product.images)
-                          ? product.images[0]
-                          : product.images.includes(",")
-                          ? product.images.split(",")[0].trim()
-                          : product.images || "https://via.placeholder.com/150"
-                      }
-                      alt={product.name}
-                      className="w-full h-90 object-cover"
-                      onError={(e) => {
-                        e.target.src = "https://via.placeholder.com/150";
-                      }}
-                    />
-                    <div className="p-6 text-center">
-                      <h3 className="text-xl font-medium">{product.name}</h3>
-                      <p className="text-green-600 font-bold text-lg">
-                        Rs.{product.price}
-                      </p>
+                    <div className="p-2 text-center">
+                      <h3 className="text-sm sm:text-xl font-medium">
+                        {product.name}
+                      </h3>
+                      <div className="flex items-center justify-center">
+                        <p className="text-gray-400 text-xs sm:text-lg line-through mr-2">
+                          Rs.{product.originalPrice}
+                        </p>
+                        <p className="text-green-600 font-bold text-xs sm:text-lg">
+                          Rs.{product.price}
+                        </p>
+                      </div>
                     </div>
                   </motion.div>
                 ))}
