@@ -130,7 +130,7 @@ const ProductDetailsPage = () => {
                 src={img}
                 alt={`Thumbnail ${index}`}
                 onClick={() => setActiveImage(img)}
-                className={`w-20 h-20 border-2 rounded-lg cursor-pointer ${
+                className={`w-20 h-50 border-2 rounded-lg cursor-pointer ${
                   activeImage === img ? "border-blue-500" : "border-gray-200"
                 }`}
               />

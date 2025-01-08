@@ -59,7 +59,13 @@ const ProductPage = () => {
                     </div>
                     {/* Product Image */}
                     <img
-                      src={product.images || "https://via.placeholder.com/150"}
+                      src={
+                        Array.isArray(product.images)
+                          ? product.images[0]
+                          : product.images.includes(",")
+                          ? product.images.split(",")[0].trim()
+                          : product.images || "https://via.placeholder.com/150"
+                      }
                       alt={product.name}
                       className="w-full h-90 object-cover"
                       onError={(e) => {
