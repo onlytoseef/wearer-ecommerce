@@ -53,22 +53,17 @@ const CategoryCarousel = () => {
         {categories.map((category) => (
           <motion.div
             key={category.id}
-            className="flex-none w-48 h-48 md:w-64 md:h-64 rounded-full shadow-lg snap-center bg-white p-4 flex flex-col items-center justify-center relative overflow-hidden cursor-pointer"
+            className="flex-none w-48 h-48 md:w-64 md:h-64 rounded-full snap-center bg-white p-4 flex flex-col items-center justify-center relative overflow-hidden cursor-pointer"
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
             onClick={() => handleCategoryClick(category.link)}
           >
-            <div className="absolute inset-0 rounded-full py-5 ">
+            <div className="absolute inset-0 rounded-full py-5">
               <img
                 src={category.image}
                 alt={category.title}
                 className="w-full h-full object-cover"
               />
-              <motion.div
-                className="absolute inset-0 bg-black"
-                initial={{ opacity: 0.5 }}
-                whileHover={{ opacity: 0.8 }}
-              ></motion.div>
             </div>
             <h3 className="text-xl font-semibold text-white z-10">
               {category.title}
