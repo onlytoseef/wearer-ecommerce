@@ -3,8 +3,6 @@ import { Button } from "antd";
 import { WhatsAppOutlined } from "@ant-design/icons";
 
 const WhaButton = () => {
-  const phoneNumber = "YOUR_PHONE_NUMBER"; // Replace with your WhatsApp number
-
   return (
     <a
       href={`https://wa.me/${+923144642896}`}
@@ -16,8 +14,8 @@ const WhaButton = () => {
         type="primary"
         shape="circle"
         size="large"
-        className="bg-green-500 hover:bg-green-600 shadow-lg"
-        icon={<WhatsAppOutlined style={{ fontSize: "24px" }} />}
+        className="bg-primary hover:bg-green-600 shadow-lg"
+        icon={<WhatsAppOutlined style={{ fontSize: "50px" }} />}
       />
     </a>
   );

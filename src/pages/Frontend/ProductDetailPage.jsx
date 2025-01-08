@@ -215,15 +215,18 @@ const ProductDetailsPage = () => {
               header="Product Description"
               key="1"
             >
-              <ul className="list-disc font-[400] text-xs list-inside text-gray-600">
+              <div className="font-[400] text-xs text-gray-600">
                 {product.description
                   ?.split(".")
                   .filter((sentence) => sentence.trim() !== "")
                   .map((sentence, index) => (
-                    <li key={index}>{sentence.trim()}.</li>
+                    <p key={index} className="mb-2">
+                      {sentence.trim()}.
+                    </p>
                   ))}
-              </ul>
+              </div>
             </Panel>
+
             <Panel
               className="font-monster uppercase sm:text-lg font-extrabold"
               header="Exchange and Return Policy"
