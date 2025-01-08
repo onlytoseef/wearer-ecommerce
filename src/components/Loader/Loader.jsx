@@ -2,8 +2,8 @@ import React from "react";
 
 const Loader = () => {
   return (
-    <div className="flex items-center justify-center min-h-screen ">
-      <div className="relative w-40 h-40 rounded-full bg-transparent">
+    <div className="flex   min-h-screen ">
+      <div className="relative w-24 h-24 rounded-full bg-transparent">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 1596 1336"
