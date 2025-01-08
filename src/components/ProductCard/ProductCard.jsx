@@ -19,12 +19,9 @@ const ProductCard = () => {
   };
 
   return (
-    <div className=" font-monster ">
+    <div className="font-monster">
       <div className="container mx-auto px-6 py-8">
-        {/* Header Section */}
-
         <div>
-          {/* Products Section */}
           <div className="w-full">
             {status === "loading" && (
               <div className="flex justify-center">
@@ -50,17 +47,20 @@ const ProductCard = () => {
                     <div className="absolute top-2 left-2 bg-green-600 text-white text-xs font-bold px-2 py-1 rounded-md">
                       SAVE 40%
                     </div>
-                    {/* Product Image */}
                     <img
-                      src={product.images || "https://via.placeholder.com/150"}
+                      src={
+                        Array.isArray(product.images)
+                          ? product.images[0]
+                          : product.images.includes(",")
+                          ? product.images.split(",")[0].trim()
+                          : product.images || "https://via.placeholder.com/150"
+                      }
                       alt={product.name}
                       className="w-full h-90 object-cover"
                       onError={(e) => {
                         e.target.src = "https://via.placeholder.com/150";
                       }}
                     />
-
-                    {/* Product Details */}
                     <div className="p-6 text-center">
                       <h3 className="text-xl font-medium">{product.name}</h3>
                       <p className="text-green-600 font-bold text-lg">
