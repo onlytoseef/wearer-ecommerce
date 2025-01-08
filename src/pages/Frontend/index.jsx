@@ -25,7 +25,7 @@ export default function Index() {
         <Route path="/user-details" element={<UserDetails />} />
         <Route path="/order-success/:orderNumber" element={<OrderSuccess />} />
 
-        <Route path="/track-order/:orderNumber" element={<TrackOrder />} />
+        <Route path="/track-order" element={<TrackOrder />} />
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/category" element={<Categories />} />

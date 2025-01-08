@@ -1,102 +1,77 @@
-import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
-import { firestore } from "../../config/firebase";
-import { doc, getDoc } from "firebase/firestore";
+import React, { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { getOrders } from "../../store/features/orderSlice";
 
 const TrackOrder = () => {
-  const { orderNumber } = useParams();
-  const [orderDetails, setOrderDetails] = useState(null);
-  const [enteredOrderNumber, setEnteredOrderNumber] = useState(""); // Input field for order number
-  const [error, setError] = useState(null);
+  const [orderNumber, setOrderNumber] = useState("");
+  const [statusMessage, setStatusMessage] = useState("");
+  const dispatch = useDispatch();
 
-  useEffect(() => {
-    if (orderNumber) {
-      const fetchOrder = async () => {
-        try {
-          const orderRef = doc(firestore, "orders", orderNumber);
-          const orderSnap = await getDoc(orderRef);
-          if (orderSnap.exists()) {
-            setOrderDetails(orderSnap.data());
-          } else {
-            setError("No such order found!");
-          }
-        } catch (error) {
-          setError("Error fetching order. Please try again.");
-        }
-      };
-      fetchOrder();
+  const { orders, loading } = useSelector((state) => state.order);
+
+  // Fetch orders from Firestore if not already loaded
+  React.useEffect(() => {
+    if (Object.keys(orders).length === 0) {
+      dispatch(getOrders());
     }
-  }, [orderNumber]);
+  }, [orders, dispatch]);
 
-  const handleOrderNumberInput = async () => {
-    setError(null);
-    if (!enteredOrderNumber) {
-      setError("Please enter a valid order number!");
+  const handleTrackOrder = () => {
+    if (loading) {
+      setStatusMessage("Loading orders. Please wait...");
       return;
     }
 
-    try {
-      const orderRef = doc(firestore, "orders", enteredOrderNumber);
-      const orderSnap = await getDoc(orderRef);
-      if (orderSnap.exists()) {
-        setOrderDetails(orderSnap.data());
-      } else {
-        setError("Order not found.");
+    const order = Object.values(orders).find(
+      (order) => order.orderNumber.toString() === orderNumber
+    );
+
+    if (order) {
+      switch (order.status) {
+        case "placed":
+          setStatusMessage(
+            "Your order has been placed successfully and will be delivered within 2-3 working days."
+          );
+          break;
+        case "confirmed":
+          setStatusMessage(
+            "Your order has been confirmed by the team and will be delivered within 2-3 working days."
+          );
+          break;
+        case "delivered":
+          setStatusMessage(
+            "Your order has been handed over to the courier. You will receive your parcel in 2 days."
+          );
+          break;
+        default:
+          setStatusMessage("Your order status is unavailable.");
       }
-    } catch (error) {
-      setError("Error fetching order. Please try again.");
+    } else {
+      setStatusMessage("Order not found. Please check the order number.");
     }
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 flex items-center justify-center py-8">
-      {orderDetails ? (
-        <div className="bg-white p-6 rounded-lg shadow-lg max-w-md w-full">
-          <h2 className="text-2xl font-semibold text-center text-green-600">
-            Congratulations!
-          </h2>
-          <p className="mt-4 text-lg">
-            Your Order Number: {orderDetails.orderNumber}
-          </p>
-          <p className="mt-2 text-lg">Status: {orderDetails.status}</p>
-          <p className="mt-2 text-lg">
-            Customer Name: {orderDetails.userDetails.name}
-          </p>
-
-          <h3 className="mt-6 text-xl font-semibold">Products Ordered:</h3>
-          <ul className="mt-4">
-            {orderDetails.items.map((item, index) => (
-              <li key={index} className="border-b py-2">
-                <p className="text-lg font-medium">{item.name}</p>
-                <p className="text-lg text-gray-500">Price: Rs {item.price}</p>
-              </li>
-            ))}
-          </ul>
-        </div>
-      ) : (
-        <div className="bg-white p-6 rounded-lg shadow-lg max-w-md w-full">
-          <h2 className="text-2xl font-semibold text-center text-blue-600">
-            Track Your Order
-          </h2>
-          <p className="mt-4 text-center text-lg">
-            Enter your order number to track your order status:
-          </p>
-
-          <input
-            type="text"
-            placeholder="Enter Order Number"
-            value={enteredOrderNumber}
-            onChange={(e) => setEnteredOrderNumber(e.target.value)}
-            className="mt-4 p-2 w-full border border-gray-300 rounded-md"
-          />
-          <button
-            onClick={handleOrderNumberInput}
-            className="mt-4 bg-blue-600 text-white py-2 px-4 w-full rounded-md hover:bg-blue-700 focus:outline-none"
-          >
-            Track Order
-          </button>
-
-          {error && <p className="mt-4 text-red-500 text-center">{error}</p>}
+    <div className="p-6 font-monster max-w-lg mx-auto items-center justify-center   bg-white shadow-md rounded-md">
+      <h2 className="text-2xl font-bold text-gray-800 text-center mb-4">
+        Track Your Order
+      </h2>
+      <input
+        type="text"
+        placeholder="Enter Order Number"
+        value={orderNumber}
+        onChange={(e) => setOrderNumber(e.target.value)}
+        className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 mb-4"
+      />
+      <button
+        onClick={handleTrackOrder}
+        className="w-full bg-primary text-white py-2 rounded-md hover:bg-green-600 transition-colors"
+      >
+        Track Order
+      </button>
+      {statusMessage && (
+        <div className="mt-4 p-4 bg-gray-100 text-gray-700 border-l-4 border-blue-500 rounded-md">
+          {statusMessage}
         </div>
       )}
     </div>

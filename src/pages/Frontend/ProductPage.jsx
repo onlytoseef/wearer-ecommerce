@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import { motion } from "framer-motion";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchProducts } from "../../store/features/productSlice";
-import { Spin } from "antd";
 import { useNavigate } from "react-router-dom";
 import Loader from "../../components/Loader";
 

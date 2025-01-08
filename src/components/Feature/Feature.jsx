@@ -2,6 +2,7 @@ import React from "react";
 import BlackHoodie from "../../assets/images/product/WhiteHoodieFront.svg";
 import WhiteHoodie from "../../assets/images/product/BlackHoodieBack.svg";
 import { motion } from "framer-motion";
+import ProductCard from "../ProductCard";
 
 const FeaturedSection = () => {
   return (
@@ -11,6 +12,7 @@ const FeaturedSection = () => {
           Featured Products
         </div>
         <hr />
+        <ProductCard />
         <div className="flex sm:flex-row flex-col items-center justify-between">
           <motion.div
             initial={{ opacity: 0, x: 50 }}

@@ -119,6 +119,11 @@ const Footer = () => {
                 Terms of Service
               </Link>
             </li>
+            <li>
+              <Link to="/admin" className="hover:text-gray-400">
+                Admin
+              </Link>
+            </li>
           </ul>
         </div>
 

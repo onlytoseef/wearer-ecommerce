@@ -1,10 +1,14 @@
-import React from "react";
-import ProductCard from "./ProductCard";
+import React, { Suspense } from "react";
+import Loader from "../Loader";
+
+const ProductCard = React.lazy(() => import("./ProductCard"));
 
 export default function Index() {
   return (
     <div>
-      <ProductCard />
+      <Suspense fallback={<Loader />}>
+        <ProductCard />
+      </Suspense>
     </div>
   );
 }

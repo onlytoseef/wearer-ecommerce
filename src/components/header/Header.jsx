@@ -64,6 +64,12 @@ export default function Header() {
             >
               Contact Us
             </Link>
+            <Link
+              to="/track-order"
+              className="text-secondary transition duration-300 ease-in-out hover:border-b-2"
+            >
+              Track Order
+            </Link>
           </nav>
 
           {/* Cart and Account Links */}
