@@ -5,7 +5,6 @@ import About from "./About";
 import Categories from "./Categories";
 import NotFound from "./NotFound";
 import ComingSoon from "./ComingSoon";
-import ProductsPage from "./ProductPage";
 import ProductDetailsPage from "./ProductDetailPage";
 import CartPage from "./CartPage";
 import JazzCashForm from "./JazzCashForm";
@@ -15,6 +14,8 @@ import ScrollToTop from "../../components/ScrollToTop";
 import TrackOrder from "./TrackOrder";
 import OrderSuccess from "./OrderSuccess";
 import UserDetails from "./UserDetails";
+import TrackSuits from "./TrackSuits";
+import Hoodies from "./Hoodies";
 
 export default function Index() {
   return (
@@ -36,7 +37,8 @@ export default function Index() {
         <Route path="/transaction-result" element={<TransactionResult />} />
         {/* Updated route */}
         <Route path="/upcoming" element={<ComingSoon />} />
-        <Route path="/productPage" element={<ProductsPage />} />
+        <Route path="/track-suits" element={<TrackSuits />} />
+        <Route path="/hoodies" element={<Hoodies />} />
       </Routes>
     </>
   );

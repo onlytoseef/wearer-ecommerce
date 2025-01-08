@@ -9,14 +9,14 @@ const categories = [
     title: "",
     image:
       "https://i.pinimg.com/736x/be/9b/4b/be9b4b2dba47b9ff50d14885b7f5b15c.jpg",
-    link: "/productPage",
+    link: "/track-suits",
   },
   {
     id: 2,
     title: "",
     image:
       "https://i.pinimg.com/736x/e8/33/3a/e8333a5e0f6061ce2403a3fc7598bbaa.jpg",
-    link: "/upcoming",
+    link: "/hoodies",
   },
   {
     id: 3,

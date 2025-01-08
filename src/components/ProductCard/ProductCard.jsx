@@ -5,7 +5,7 @@ import { fetchProducts } from "../../store/features/productSlice";
 import { useNavigate } from "react-router-dom";
 import Loader from "../../components/Loader";
 
-const ProductCard = () => {
+const ProductCard = ({ category }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { products, status, error } = useSelector((state) => state.products);
@@ -17,6 +17,13 @@ const ProductCard = () => {
   const handleProductClick = (productId) => {
     navigate(`/products/${productId}`);
   };
+
+  // Filter products by category
+  const filteredProducts = category
+    ? products.filter(
+        (product) => product.category.toLowerCase() === category.toLowerCase()
+      )
+    : products;
 
   return (
     <div className="font-monster">
@@ -37,7 +44,7 @@ const ProductCard = () => {
 
             {status === "succeeded" && (
               <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-5 gap-6">
-                {products.map((product) => (
+                {filteredProducts.map((product) => (
                   <motion.div
                     key={product.id}
                     className="bg-white shadow-lg rounded-md overflow-hidden transition-all cursor-pointer"
