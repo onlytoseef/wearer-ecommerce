@@ -2,11 +2,13 @@ import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { doc, getDoc } from "firebase/firestore";
-import { message } from "antd";
+import { message, Collapse } from "antd";
 import { firestore } from "../../config/firebase";
 import { useDispatch } from "react-redux";
 import { addItemToCart } from "../../store/features/cartSlice";
 import Loader from "../../components/Loader";
+
+const { Panel } = Collapse;
 
 const ProductDetailsPage = () => {
   const { productId } = useParams();
@@ -118,7 +120,7 @@ const ProductDetailsPage = () => {
             <img
               src={activeImage || "https://via.placeholder.com/400"}
               alt={product.name}
-              className="w-full h-96 object-cover"
+              className="w-full h-full md:h-50 object-cover"
             />
           </div>
           <div className="flex gap-2">
@@ -148,7 +150,6 @@ const ProductDetailsPage = () => {
           </h1>
           <p className="text-xl text-gray-800 mb-6">Rs. {product.price}</p>
           <hr />
-          <p className="mt-4 text-gray-600">{product.description}</p>
 
           {product.sizes?.length > 0 && (
             <div className="mt-6">
@@ -193,7 +194,7 @@ const ProductDetailsPage = () => {
           <div className="flex gap-4 mt-6">
             <button
               onClick={handleAddToCart}
-              className="flex-1 py-3 bg-blue-500 text-white font-medium rounded-md"
+              className="flex-1 py-3 bg-transparent border-black border-2 text-black font-medium rounded-md"
             >
               Add to Cart
             </button>
@@ -204,6 +205,68 @@ const ProductDetailsPage = () => {
               Buy Now
             </button>
           </div>
+          <Collapse
+            bordered={false}
+            className="mt-4 bg-white "
+            defaultActiveKey={["0"]}
+          >
+            <Panel
+              className="font-monster sm:text-lg uppercase font-extrabold"
+              header="Product Description"
+              key="1"
+            >
+              <ul className="list-disc font-[400] text-xs list-inside text-gray-600">
+                {product.description
+                  ?.split(".")
+                  .filter((sentence) => sentence.trim() !== "")
+                  .map((sentence, index) => (
+                    <li key={index}>{sentence.trim()}.</li>
+                  ))}
+              </ul>
+            </Panel>
+            <Panel
+              className="font-monster uppercase sm:text-lg font-extrabold"
+              header="Exchange and Return Policy"
+              key="2"
+            >
+              <ul className="list-disc list-inside text-gray-600">
+                {product.additionalInfo
+                  ?.split(".")
+                  .filter((sentence) => sentence.trim() !== "")
+                  .map((sentence, index) => (
+                    <li key={index}>{sentence.trim()}.</li>
+                  ))}
+              </ul>
+            </Panel>
+            <Panel
+              className="font-monster uppercase sm:text-lg font-extrabold"
+              header="Delievery Policy"
+              key="3"
+            >
+              <ul className="list-disc list-inside text-gray-600">
+                {product.additionalInfo
+                  ?.split(".")
+                  .filter((sentence) => sentence.trim() !== "")
+                  .map((sentence, index) => (
+                    <li key={index}>{sentence.trim()}.</li>
+                  ))}
+              </ul>
+            </Panel>
+            <Panel
+              className="font-monster uppercase sm:text-lg font-extrabold"
+              header="FAQ'S"
+              key="4"
+            >
+              <ul className="list-disc list-inside text-gray-600">
+                {product.additionalInfo
+                  ?.split(".")
+                  .filter((sentence) => sentence.trim() !== "")
+                  .map((sentence, index) => (
+                    <li key={index}>{sentence.trim()}.</li>
+                  ))}
+              </ul>
+            </Panel>
+          </Collapse>
         </motion.div>
       </div>
     </div>
