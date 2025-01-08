@@ -23,7 +23,7 @@ export default function Index() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/user-details" element={<UserDetails />} />
-        <Route path="/order-success:orderNumber" element={<OrderSuccess />} />
+        <Route path="/order-success/:orderNumber" element={<OrderSuccess />} />
 
         <Route path="/track-order/:orderNumber" element={<TrackOrder />} />
         <Route path="/about" element={<About />} />

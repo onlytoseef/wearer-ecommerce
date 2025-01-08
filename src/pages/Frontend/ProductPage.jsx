@@ -55,6 +55,9 @@ const ProductPage = () => {
                     whileHover={{ scale: 1.05 }}
                     onClick={() => handleProductClick(product.id)}
                   >
+                    <div className="absolute top-2 left-2 bg-green-600 text-white text-xs font-bold px-2 py-1 rounded-md">
+                      SAVE 40%
+                    </div>
                     {/* Product Image */}
                     <img
                       src={product.images || "https://via.placeholder.com/150"}

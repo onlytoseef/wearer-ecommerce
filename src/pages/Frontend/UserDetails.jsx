@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { placeOrderAsync } from "../../store/features/orderSlice";
 import { message } from "antd";
 
 const UserDetails = () => {
   const location = useLocation();
+  const navigate = useNavigate();
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [deliveryInfo, setDeliveryInfo] = useState({
     email: "",
@@ -30,7 +31,7 @@ const UserDetails = () => {
     setDeliveryInfo({ ...deliveryInfo, [name]: value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     // Prepare the order data
@@ -40,15 +41,19 @@ const UserDetails = () => {
       billingSameAsShipping,
     };
 
-    // Dispatch the placeOrderAsync action to save order in Firestore
-    dispatch(placeOrderAsync(orderData))
-      .then(() => {
+    try {
+      const resultAction = await dispatch(placeOrderAsync(orderData));
+      if (placeOrderAsync.fulfilled.match(resultAction)) {
+        const orderNumber = resultAction.payload.orderNumber; // Adjust based on the payload structure
         message.success("Order Placed Successfully");
-      })
-      .catch((error) => {
-        console.error("Order placement failed:", error);
-        message.error("An Error occured while placing Order");
-      });
+        navigate(`/order-success/${orderNumber}`);
+      } else {
+        throw new Error("Order placement failed");
+      }
+    } catch (error) {
+      console.error("Order placement failed:", error);
+      message.error("An error occurred while placing the order");
+    }
   };
 
   return (
@@ -145,9 +150,6 @@ const UserDetails = () => {
             <div className="mt-4">
               <div className="border p-4 rounded-lg flex justify-between items-center cursor-pointer">
                 <span>Cash on Delivery (COD)</span>
-              </div>
-              <div className="border p-4 mt-2 rounded-lg flex justify-between items-center cursor-pointer">
-                <span>Bank Details</span>
               </div>
             </div>
 
