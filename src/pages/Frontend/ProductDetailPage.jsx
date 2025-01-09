@@ -219,11 +219,23 @@ const ProductDetailsPage = () => {
                 {product.description
                   ?.split(".")
                   .filter((sentence) => sentence.trim() !== "")
-                  .map((sentence, index) => (
-                    <p key={index} className="mb-2">
-                      {sentence.trim()}.
-                    </p>
-                  ))}
+                  .map((sentence, index) => {
+                    const parts = sentence.split(":");
+                    return (
+                      <p key={index} className="mb-2">
+                        {parts.length > 1 ? (
+                          <>
+                            <span className="font-bold">
+                              {parts[0].trim()}:
+                            </span>{" "}
+                            {parts[1].trim()}
+                          </>
+                        ) : (
+                          sentence.trim()
+                        )}
+                      </p>
+                    );
+                  })}
               </div>
             </Panel>
 
