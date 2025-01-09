@@ -256,10 +256,11 @@ const AddProduct = () => {
             ]}
           >
             <Select mode="multiple" placeholder="Select sizes">
-              <Option value="small">Small</Option>
-              <Option value="medium">Medium</Option>
-              <Option value="large">Large</Option>
-              <Option value="extra-large">Extra Large</Option>
+              <Option value="S-30">S-30</Option>
+              <Option value="M-32">M-32</Option>
+              <Option value="L-34">L-34</Option>
+              <Option value="XL-36">XL-36</Option>
+              <Option value="XXL-38">XXL-38</Option>
             </Select>
           </Form.Item>
 

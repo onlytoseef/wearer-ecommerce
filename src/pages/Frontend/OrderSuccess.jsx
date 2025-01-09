@@ -5,7 +5,7 @@ const OrderSuccess = () => {
   const { orderNumber } = useParams();
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
+    <div className="min-h-screen font-monster flex items-center justify-center bg-gray-100">
       <div className="bg-white p-8 rounded-lg shadow-lg text-center">
         <h1 className="text-3xl font-bold text-green-500 mb-4">
           Order Placed Successfully!

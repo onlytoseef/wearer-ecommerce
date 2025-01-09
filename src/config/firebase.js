@@ -6,7 +6,7 @@ import { getFirestore } from "firebase/firestore";
 import { getAuth } from "firebase/auth";
 import { getAnalytics } from "firebase/analytics";
 
-// Firebase configuration
+// Firebase configuration Production
 const firebaseConfig = {
   apiKey: "AIzaSyDvy04VUFiQ-g2zjN-QzCEyay9SAzRncMY",
   authDomain: "wearer-c5407.firebaseapp.com",

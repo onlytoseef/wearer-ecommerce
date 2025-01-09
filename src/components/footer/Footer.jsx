@@ -76,13 +76,13 @@ const Footer = () => {
           <h3 className="font-bold text-white mb-4">PAGES</h3>
           <ul>
             <li>
-              <Link to="/our-muffs" className="hover:text-gray-400">
-                Our Muff's
+              <Link to="/about" className="hover:text-gray-400">
+                About Us
               </Link>
             </li>
             <li>
-              <Link to="/inquiry" className="hover:text-gray-400">
-                Inquiry
+              <Link to="/contact" className="hover:text-gray-400">
+                Contact Us
               </Link>
             </li>
             <li>
@@ -92,19 +92,10 @@ const Footer = () => {
             </li>
             <li>
               <Link to="/blogs" className="hover:text-gray-400">
-                Blogs
+                category
               </Link>
             </li>
-            <li>
-              <Link to="/faqs" className="hover:text-gray-400">
-                FAQ's
-              </Link>
-            </li>
-            <li>
-              <Link to="/terms-of-service" className="hover:text-gray-400">
-                Terms of Service
-              </Link>
-            </li>
+
             <li>
               <Link to="/admin" className="hover:text-gray-400">
                 Admin
@@ -113,37 +104,35 @@ const Footer = () => {
           </ul>
         </div>
 
-        {/* About Column */}
         <div>
           <h3 className="font-bold text-white mb-4">ABOUT</h3>
           <ul>
             <li>
-              <Link to="/our-story" className="hover:text-gray-400">
+              <Link to="/about" className="hover:text-gray-400">
                 Our Story
               </Link>
             </li>
             <li>
-              <Link to="/our-values" className="hover:text-gray-400">
+              <Link to="/about" className="hover:text-gray-400">
                 Our Values
               </Link>
             </li>
             <li>
-              <Link to="/innovation" className="hover:text-gray-400">
+              <Link to="/about" className="hover:text-gray-400">
                 Innovation made Accessible
               </Link>
             </li>
           </ul>
         </div>
 
-        {/* Social Column */}
         <div>
           <h3 className="font-bold text-white mb-4">SOCIAL</h3>
           <p className="mb-4">
-            Follow us on Instagram and get a 10% discount on your first order.
+            Follow us on Instagram and get a Exclusive Deals
           </p>
           <div className="flex space-x-4">
             <a
-              href="https://facebook.com"
+              href="https://web.facebook.com/wearers.pk"
               target="_blank"
               rel="noopener noreferrer"
               className="hover:text-gray-400"
@@ -152,7 +141,7 @@ const Footer = () => {
             </a>
 
             <a
-              href="https://instagram.com"
+              href="https://www.instagram.com/wearers.pk"
               target="_blank"
               rel="noopener noreferrer"
               className="hover:text-gray-400"
@@ -160,7 +149,7 @@ const Footer = () => {
               <AiFillInstagram size={30} />
             </a>
             <a
-              href="https://youtube.com"
+              href="https://www.youtube.com/@wearerspk"
               target="_blank"
               rel="noopener noreferrer"
               className="hover:text-gray-400"
