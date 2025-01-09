@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useMemo } from "react";
 import { motion } from "framer-motion";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchProducts } from "../../store/features/productSlice";
@@ -10,20 +10,25 @@ const ProductCard = ({ category }) => {
   const navigate = useNavigate();
   const { products, status, error } = useSelector((state) => state.products);
 
+  // Fetch products only if the status is idle (not fetched yet)
   useEffect(() => {
-    dispatch(fetchProducts());
-  }, [dispatch]);
+    if (status === "idle") {
+      dispatch(fetchProducts());
+    }
+  }, [status, dispatch]);
 
   const handleProductClick = (productId) => {
     navigate(`/products/${productId}`);
   };
 
-  // Filter products by category
-  const filteredProducts = category
-    ? products.filter(
-        (product) => product.category.toLowerCase() === category.toLowerCase()
-      )
-    : products;
+  // Memoize filtered products to avoid recalculations
+  const filteredProducts = useMemo(() => {
+    return category
+      ? products.filter(
+          (product) => product.category.toLowerCase() === category.toLowerCase()
+        )
+      : products;
+  }, [products, category]);
 
   return (
     <div className="font-monster">
@@ -43,7 +48,7 @@ const ProductCard = ({ category }) => {
             )}
 
             {status === "succeeded" && (
-              <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-5 gap-6">
+              <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-4 gap-6">
                 {filteredProducts.map((product) => (
                   <motion.div
                     key={product.id}
@@ -66,7 +71,7 @@ const ProductCard = ({ category }) => {
                           e.target.src = "https://via.placeholder.com/150";
                         }}
                       />
-                      <div className="absolute top-2 left-2 bg-green-600 text-white text-xs font-bold px-2 py-1 rounded-md">
+                      <div className="absolute top-2 left-2 bg-green-600 text-white text-xs  font-bold px-2 py-1 rounded-md">
                         SAVE 40%
                       </div>
                     </div>

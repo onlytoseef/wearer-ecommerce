@@ -8,7 +8,7 @@ const FeaturedSection = () => {
   return (
     <section className="bg-gray-100 py-16">
       <div className="container mx-auto px-6 text-center">
-        <div className="text-center py-5 font-secondary text-[3rem]  font-[450] sm:text-[3rem]">
+        <div className="text-center py-5 font-secondary text-[3rem] font-[450] sm:text-[3rem]">
           Featured Products
         </div>
         <hr />
@@ -20,7 +20,11 @@ const FeaturedSection = () => {
             transition={{ duration: 0.8 }}
             className="lg:w-1/2 flex justify-center"
           >
-            <img src={BlackHoodie} alt="" />
+            <img
+              src={BlackHoodie}
+              alt=""
+              className="w-full h-auto max-w-[300px] sm:max-w-[400px]"
+            />
           </motion.div>
           <motion.div
             initial={{ opacity: 0, y: 50 }}
@@ -50,7 +54,11 @@ const FeaturedSection = () => {
             transition={{ duration: 0.8 }}
             className="lg:w-1/2 flex justify-center"
           >
-            <img src={WhiteHoodie} alt="" />
+            <img
+              src={WhiteHoodie}
+              alt=""
+              className="w-full h-auto max-w-[300px] sm:max-w-[400px]"
+            />
           </motion.div>
         </div>
       </div>
