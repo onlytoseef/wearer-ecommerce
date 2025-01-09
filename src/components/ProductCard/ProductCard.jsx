@@ -52,7 +52,7 @@ const ProductCard = ({ category }) => {
                 {filteredProducts.map((product) => (
                   <motion.div
                     key={product.id}
-                    className="bg-white shadow-lg rounded-md overflow-hidden transition-all cursor-pointer"
+                    className="bg-white shadow-xl rounded-md overflow-hidden transition-all cursor-pointer"
                     onClick={() => handleProductClick(product.id)}
                   >
                     <div className="relative">

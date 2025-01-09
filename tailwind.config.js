@@ -11,12 +11,13 @@ export default {
         secondary: "#EBE2D0",
       },
       animation: {
-        dash: "dash 2s ease-in-out forwards",
+        dash: "dash 2s ease-in-out infinite",
       },
       keyframes: {
         dash: {
-          from: { strokeDashoffset: "1000" },
-          to: { strokeDashoffset: "0" },
+          "0%": { strokeDashoffset: "1000" },
+          "50%": { strokeDashoffset: "0" },
+          "100%": { strokeDashoffset: "1000" },
         },
       },
     },

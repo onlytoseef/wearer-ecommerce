@@ -11,33 +11,23 @@ const Footer = () => {
           <h3 className="font-bold text-white mb-4">CATEGORIES</h3>
           <ul>
             <li>
-              <Link to="/shirts" className="hover:text-gray-400">
-                Shirts
+              <Link to="/hoodies" className="hover:text-gray-400">
+                Hoodies
               </Link>
             </li>
             <li>
-              <Link to="/pants" className="hover:text-gray-400">
-                Pants
+              <Link to="/track-suits" className="hover:text-gray-400">
+                Track Suits
               </Link>
             </li>
             <li>
-              <Link to="/active-wear" className="hover:text-gray-400">
-                Active Wear
+              <Link to="/upcoming" className="hover:text-gray-400">
+                Caps
               </Link>
             </li>
             <li>
-              <Link to="/t-shirts" className="hover:text-gray-400">
+              <Link to="/t-upcoming" className="hover:text-gray-400">
                 T-Shirts
-              </Link>
-            </li>
-            <li>
-              <Link to="/sale" className="hover:text-gray-400">
-                Sale
-              </Link>
-            </li>
-            <li>
-              <Link to="/return-exchange" className="hover:text-gray-400">
-                Return/Exchange
               </Link>
             </li>
           </ul>
@@ -48,7 +38,7 @@ const Footer = () => {
           <h3 className="font-bold text-white mb-4">CUSTOMER SERVICE</h3>
           <ul>
             <li>
-              <Link to="/contact-us" className="hover:text-gray-400">
+              <Link to="/contact" className="hover:text-gray-400">
                 Contact Us
               </Link>
             </li>
@@ -57,11 +47,7 @@ const Footer = () => {
                 Track Order
               </Link>
             </li>
-            <li>
-              <Link to="/place-return" className="hover:text-gray-400">
-                Place Return/Exchange
-              </Link>
-            </li>
+
             <li>
               <Link to="/refund-policy" className="hover:text-gray-400">
                 Return, Refund & Cancellation Policy

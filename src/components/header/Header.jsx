@@ -18,8 +18,8 @@ export default function Header() {
 
   return (
     <header className="sticky text-center top-0 font-monster z-10">
-      <div className="font-monster text-primary bg-secondary">
-        Free Delivery All over Pakistan
+      <div className="font-monster text-xs py-1 text-primary bg-secondary">
+        Free Delivery All over Pakistan 🚚
       </div>
 
       <header className="bg-primary shadow-md">
@@ -137,11 +137,11 @@ export default function Header() {
               <button
                 onClick={() => {
                   setIsMobileMenuOpen(false);
-                  navigate("/account");
+                  navigate("/track-order");
                 }}
                 className="text-gray-800 text-lg font-medium"
               >
-                Account
+                Track Order
               </button>
             </nav>
           </div>

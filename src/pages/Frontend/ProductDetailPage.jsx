@@ -211,8 +211,8 @@ const ProductDetailsPage = () => {
             defaultActiveKey={["0"]}
           >
             <Panel
-              className="font-monster sm:text-lg uppercase font-extrabold"
-              header="Product Description"
+              className="font-monster sm:text-lg  font-extrabold"
+              header="PRODUCT DESCRIPTION"
               key="1"
             >
               <div className="font-[400] text-xs text-gray-600">
@@ -240,33 +240,78 @@ const ProductDetailsPage = () => {
             </Panel>
 
             <Panel
-              className="font-monster uppercase sm:text-lg font-extrabold"
-              header="Exchange and Return Policy"
+              className="font-monster  sm:text-lg font-extrabold"
+              header="EXCHANGE AND RETURN POLICY"
               key="2"
             >
-              <ul className="list-disc list-inside text-gray-600">
-                {product.additionalInfo
-                  ?.split(".")
-                  .filter((sentence) => sentence.trim() !== "")
-                  .map((sentence, index) => (
-                    <li key={index}>{sentence.trim()}.</li>
-                  ))}
+              <ul className="list-disc text-xs font-[400] list-inside text-gray-600">
+                <li>
+                  <strong>Exchange Policy:</strong> If a faulty or incorrect
+                  item is delivered, you may request an exchange within 7 days
+                  of receiving the product. However, the following conditions
+                  must be met:
+                </li>
+                <li>
+                  1. The product must be returned in its original packaging and
+                  in the same condition as it was delivered.
+                </li>
+                <li>
+                  2. If the mistake is on your part (e.g., wrong size, color, or
+                  order selection), you will bear the delivery charges for the
+                  exchange.
+                </li>
+                <li>
+                  3. If the fault lies on our end (e.g., defective product or
+                  incorrect item delivered), we will cover the delivery charges.
+                </li>
               </ul>
+              <p className="text-gray-600 mt-4">
+                For any further assistance, feel free to contact our{" "}
+                <strong>customer support team</strong>.
+              </p>
             </Panel>
+
             <Panel
-              className="font-monster uppercase sm:text-lg font-extrabold"
-              header="Delievery Policy"
+              className="font-monster font-extrabold  sm:text-lg "
+              header="DELIVERY POLICY"
               key="3"
             >
-              <ul className="list-disc list-inside text-gray-600">
-                {product.additionalInfo
-                  ?.split(".")
-                  .filter((sentence) => sentence.trim() !== "")
-                  .map((sentence, index) => (
-                    <li key={index}>{sentence.trim()}.</li>
-                  ))}
+              <ul className="list-disc font-[400] text-xs list-inside text-gray-600">
+                <li>
+                  1. <strong>Free Delivery:</strong> We offer free delivery on
+                  all orders, regardless of the location, ensuring you get your
+                  products without any additional charges.
+                </li>
+                <li>
+                  2. <strong>Delivery Timeframe:</strong> Orders are processed
+                  and dispatched within 1-2 business days after confirmation.
+                  Most deliveries are completed within 3-7 business days,
+                  depending on your location.
+                </li>
+                <li>
+                  3. <strong>Order Tracking:</strong> Once your order is
+                  shipped, you will receive a tracking ID, so you can monitor
+                  the status of your delivery.
+                </li>
+                <li>
+                  4. <strong>Delivery Delays:</strong> Although we aim for
+                  timely deliveries, unexpected delays may occur due to factors
+                  like weather conditions, courier issues, or public holidays.
+                  If there's any delay, we will notify you promptly.
+                </li>
+                <li>
+                  5. <strong>Failed Delivery Attempts:</strong> In case of an
+                  unsuccessful delivery attempt due to incorrect address details
+                  or unavailability of the recipient, we will contact you to
+                  arrange a redelivery.
+                </li>
               </ul>
+              <p className="text-gray-600 mt-4">
+                For further assistance or questions about your delivery, please
+                reach out to our <strong>customer support team</strong>.
+              </p>
             </Panel>
+
             <Panel
               className="font-monster uppercase sm:text-lg font-extrabold"
               header="FAQ'S"
