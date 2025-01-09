@@ -1,11 +1,11 @@
 import "./App.css";
 import Routes from "./pages/Routes";
-import WhaButton from "./components/WaButton/WaButton";
+// import WhaButton from "./components/WaButton/WaButton";
 
 function App() {
   return (
     <>
-      <WhaButton />
+      {/* <WhaButton /> */}
       <Routes />
     </>
   );
