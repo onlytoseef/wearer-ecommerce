@@ -25,16 +25,8 @@ export default function AdminLogin() {
   };
 
   return (
-    <div
-      className="!font-monster"
-      style={{
-        maxWidth: "400px",
-        margin: "50px auto",
-        padding: "20px",
-        boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
-      }}
-    >
-      <Title level={3} style={{ textAlign: "center" }}>
+    <div className="!font-monster shadow-lg max-w-[20rem] p-5 m-auto ">
+      <Title className="font-monster" level={3} style={{ textAlign: "center" }}>
         Admin Login
       </Title>
 
