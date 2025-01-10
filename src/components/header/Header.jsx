@@ -1,13 +1,22 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { LuUserRound } from "react-icons/lu";
 import { PiShoppingCart } from "react-icons/pi";
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import Logo from "../../assets/images/Logo/Logo.svg";
+import Wearers from "../../assets/images/Logo/Wearers.svg";
 
 export default function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
   const navigate = useNavigate();
+
+  // Detect screen size and update `isMobile`
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth < 768);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   // Get cart item count from Redux state
   const cartItems = useSelector((state) => state.cart.items);
@@ -24,6 +33,7 @@ export default function Header() {
 
       <header className="bg-primary shadow-md">
         <div className="container mx-auto flex items-center justify-between p-4">
+          {/* Mobile Menu Toggle Button */}
           <button
             className="md:hidden text-3xl text-secondary"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
@@ -31,14 +41,24 @@ export default function Header() {
             ☰
           </button>
 
-          <img
-            className="hover:cursor-pointer"
-            src={Logo}
-            width={40}
-            onClick={() => navigate("/")}
-          />
+          {/* Logo Switching Based on Screen Size */}
+          {isMobile ? (
+            <img
+              className="hover:cursor-pointer"
+              src={Logo}
+              width={40}
+              onClick={() => navigate("/")}
+            />
+          ) : (
+            <img
+              className="hover:cursor-pointer"
+              src={Wearers}
+              width={150}
+              onClick={() => navigate("/")}
+            />
+          )}
 
-          {/* Navigation Links (Large screens) */}
+          {/* Navigation Links for Large Screens */}
           <nav className="hidden md:flex space-x-8 absolute left-1/2 transform -translate-x-1/2">
             <Link
               to="/"
@@ -93,6 +113,7 @@ export default function Header() {
             </button>
           </div>
 
+          {/* Cart and Account for Mobile */}
           <div className="md:hidden flex space-x-4 items-center">
             <button className="relative" onClick={() => navigate("/cart")}>
               <PiShoppingCart color="#EBE2D0" size={20} />
@@ -108,6 +129,7 @@ export default function Header() {
           </div>
         </div>
 
+        {/* Mobile Menu Links */}
         {isMobileMenuOpen && (
           <div className="md:hidden bg-white shadow-lg py-4">
             <nav className="flex flex-col space-y-4 items-center">
