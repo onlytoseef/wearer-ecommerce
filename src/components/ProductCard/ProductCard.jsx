@@ -32,7 +32,7 @@ const ProductCard = ({ category }) => {
 
   return (
     <div className="font-monster">
-      <div className="container mx-auto px-6 py-8">
+      <div className="container mx-auto md:px-8 md:py-10 px-2 py-4">
         <div>
           <div className="w-full">
             {status === "loading" && (

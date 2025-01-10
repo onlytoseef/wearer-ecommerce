@@ -5,7 +5,8 @@ import {
   removeItemFromCart,
 } from "../../store/features/cartSlice";
 import { message } from "antd";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { AiOutlineDelete } from "react-icons/ai";
 
 const CartPage = () => {
   const cartItems = useSelector((state) => state.cart.items);
@@ -48,18 +49,30 @@ const CartPage = () => {
   };
 
   if (cartItems.length === 0) {
-    return <div className="text-center p-10">Your cart is empty.</div>;
+    return (
+      <div className="flex flex-col justify-center items-center h-screen">
+        <div className="text-center font-monster p-10">Your cart is empty.</div>
+        <Link to="/category">
+          <button className="m-auto p-3 font-monster text-center text-white bg-primary rounded-lg font-semibold hover:bg-green-600">
+            Continue Shopping
+          </button>
+        </Link>
+      </div>
+    );
   }
 
   return (
-    <div className="container mx-auto p-6 grid grid-cols-1 md:grid-cols-3 gap-6">
+    <div className="container font-monster mx-auto p-6 grid grid-cols-1 md:grid-cols-3 gap-6">
       {/* Cart Items Section */}
-      <div className="col-span-2 space-y-4">
-        <h1 className="text-3xl font-semibold mb-6">Shopping Cart</h1>
+      <div className="col-span-2  space-y-4">
+        <h1 className="text-3xl text-center font-semibold mb-6">
+          Shopping Cart
+        </h1>
+        <hr />
         {cartItems.map((item) => (
           <div
             key={item.id}
-            className="flex items-center justify-between p-4 border rounded-lg"
+            className="flex text-xs sm:text-lg items-center justify-between p-4 border rounded-lg"
           >
             <div className="flex items-center">
               <img
@@ -76,31 +89,31 @@ const CartPage = () => {
             <div className="flex items-center">
               <button
                 onClick={() => handleDecrement(item.id)}
-                className="px-2 py-1 border rounded-lg"
+                className="sm:px-2 px-2  py-1 border rounded-lg"
               >
                 -
               </button>
-              <span className="px-4">{item.quantity}</span>
+              <span className="sm:px-4 px-1 ">{item.quantity}</span>
               <button
                 onClick={() => handleIncrement(item.id)}
-                className="px-2 py-1 border rounded-lg"
+                className="sm:px-2 px-2 py-1 border rounded-lg"
               >
                 +
               </button>
             </div>
             <button
               onClick={() => handleRemoveItem(item.id)}
-              className="text-red-500 hover:text-red-700"
+              className="text-red-500 px-2 hover:text-red-700"
             >
-              Remove
+              <AiOutlineDelete />
             </button>
           </div>
         ))}
       </div>
 
       {/* Order Summary Section */}
-      <div className="p-6 border rounded-lg bg-gray-50">
-        <h2 className="text-xl font-semibold mb-4">Order Summary</h2>
+      <div className=" p-6 border rounded-lg bg-gray-50">
+        <h2 className="md:text-xl  font-semibold mb-4">Order Summary</h2>
         <div className="space-y-2">
           <div className="flex justify-between">
             <span>Subtotal</span>
@@ -115,7 +128,7 @@ const CartPage = () => {
             <span>Rs. {calculateTotalPrice()}</span>
           </div>
         </div>
-        <button className="w-full mt-6 p-3 text-white bg-blue-500 rounded-lg font-semibold hover:bg-blue-600">
+        <button className="w-full mt-6 p-3 text-white bg-primary rounded-lg font-semibold hover:bg-green-600">
           Proceed to Checkout
         </button>
       </div>
