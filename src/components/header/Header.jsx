@@ -112,12 +112,12 @@ export default function Header() {
                 </span>
               )}
             </button>
-            <button
+            {/* <button
               onClick={() => navigate("/account")}
               className="text-secondary transition duration-300 ease-in-out hover:border-b-2"
             >
               <LuUserRound size={20} />
-            </button>
+            </button> */}
           </div>
 
           {/* Cart and Account for Mobile */}
@@ -130,9 +130,9 @@ export default function Header() {
                 </span>
               )}
             </button>
-            <button onClick={() => navigate("/account")}>
+            {/* <button onClick={() => navigate("/account")}>
               <LuUserRound color="#EBE2D0" size={20} />
-            </button>
+            </button> */}
           </div>
         </div>
 
