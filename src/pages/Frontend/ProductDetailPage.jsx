@@ -7,6 +7,7 @@ import { firestore } from "../../config/firebase";
 import { useDispatch } from "react-redux";
 import { addItemToCart } from "../../store/features/cartSlice";
 import Loader from "../../components/Loader";
+import { Helmet } from "react-helmet-async";
 
 const { Panel } = Collapse;
 
@@ -108,6 +109,13 @@ const ProductDetailsPage = () => {
 
   return (
     <div className="container mx-auto p-6">
+      <Helmet>
+        <title>{product.name} | Wearers</title>
+        <meta
+          name="description"
+          content={product.description || "Product details"}
+        />
+      </Helmet>
       <div className="flex flex-col lg:flex-row gap-8">
         {/* Product Images Section */}
         <motion.div

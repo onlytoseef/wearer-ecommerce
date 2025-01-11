@@ -1,10 +1,22 @@
 import React from "react";
 import { motion } from "framer-motion";
 import ContactUs from "../../assets/images/Contact/ContactUs.svg";
+import { Helmet } from "react-helmet-async";
 
 const Contact = () => {
   return (
     <div className="container mx-auto p-6">
+      <Helmet>
+        <title>Contact Us | Wearers</title>
+        <meta
+          name="description"
+          content="Get in touch with Wearers for customer support, inquiries, or feedback."
+        />
+        <meta
+          name="keywords"
+          content="contact, wearers, support, customer service"
+        />
+      </Helmet>
       <motion.div
         initial={{ opacity: 0, y: 50 }}
         animate={{ opacity: 1, y: 0 }}

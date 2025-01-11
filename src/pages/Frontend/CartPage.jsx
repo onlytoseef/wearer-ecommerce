@@ -7,6 +7,7 @@ import {
 import { message } from "antd";
 import { Link, useNavigate } from "react-router-dom";
 import { AiOutlineDelete } from "react-icons/ai";
+import { Helmet } from "react-helmet-async";
 
 const CartPage = () => {
   const cartItems = useSelector((state) => state.cart.items);
@@ -51,6 +52,14 @@ const CartPage = () => {
   if (cartItems.length === 0) {
     return (
       <div className="flex flex-col justify-center items-center h-screen">
+        <Helmet>
+          <title>Cart | Wearers</title>
+          <meta name="description" content="Wearers Cart page" />
+          <meta
+            name="keywords"
+            content="cartpage,cart,wearers.pk,wearers.store,hoodies for boys"
+          />
+        </Helmet>
         <div className="text-center font-monster p-10">Your cart is empty.</div>
         <Link to="/category">
           <button className="m-auto p-3 font-monster text-center text-white bg-primary rounded-lg font-semibold hover:bg-green-600">
@@ -63,6 +72,14 @@ const CartPage = () => {
 
   return (
     <div className="container font-monster mx-auto p-6 grid grid-cols-1 md:grid-cols-3 gap-6">
+      <Helmet>
+        <title>Cart | Wearers</title>
+        <meta name="description" content="Wearers Cart page" />
+        <meta
+          name="keywords"
+          content="cartpage,cart,wearers.pk,wearers.store,hoodies for boys"
+        />
+      </Helmet>
       {/* Cart Items Section */}
       <div className="col-span-2  space-y-4">
         <h1 className="text-3xl text-center font-semibold mb-6">

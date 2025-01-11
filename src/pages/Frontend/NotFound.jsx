@@ -3,10 +3,15 @@ import { motion } from "framer-motion";
 import "tailwindcss/tailwind.css";
 import { Link } from "react-router-dom";
 import NoFound from "../../assets/images/NotFound/NoFound.svg";
+import { Helmet } from "react-helmet-async";
 
 const NotFound = () => {
   return (
     <div className="flex flex-col items-center justify-center h-screen bg-gray-100 text-center overflow-hidden">
+      <Helmet>
+        <title>404 Not Found</title>
+        <meta name="description" content="This page contains error 404" />
+      </Helmet>
       <motion.h1
         className="text-9xl font-extrabold text-gray-800 mb-4"
         initial={{ scale: 0 }}

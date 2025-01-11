@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import customer from "../../assets/images/AboutUs/customer.svg";
-import refund from "../../assets/images/AboutUs/refund.svg";
+
 import about from "../../assets/images/AboutUs/about.svg";
+import { Helmet } from "react-helmet-async";
+import FeatCard from "../../components/FeatCard";
 
 const About = () => {
   const [scrollY, setScrollY] = useState(0);
@@ -17,6 +18,17 @@ const About = () => {
 
   return (
     <>
+      <Helmet>
+        <title>About Us | Wearers</title>
+        <meta
+          name="description"
+          content="Learn more about Wearers and our mission to redefine fashion."
+        />
+        <meta
+          name="keywords"
+          content="about, wearers, mission, fashion, clothing"
+        />
+      </Helmet>
       <div className="text-secondary font-sans min-h-screen flex flex-col">
         <section className="flex mt-[5rem] flex-col md:flex-row items-center justify-center w-full px-8 py-12 gap-12">
           <motion.div
@@ -72,51 +84,7 @@ const About = () => {
           </motion.div>
         </section>
       </div>
-
-      <div className="flex justify-center flex-col mb-[5rem] sm:flex-row sm:space-x-[10rem] space-y-[5rem] sm:space-y-0">
-        {/* First Card */}
-        <div className="flex-col text-center">
-          <img
-            className="m-auto"
-            src={customer}
-            width={200}
-            alt="Customer Support"
-          />
-          <h1 className="text-black text-[2rem] font-secondary font-[500]">
-            Customer Support
-          </h1>
-          <p className="text-primary font-secondary">
-            We Provide Quality Stuff to our Customers
-          </p>
-        </div>
-
-        {/* Second Card */}
-        <div className="flex-col text-center">
-          <img className="m-auto" src={refund} width={238} alt="Easy Refund" />
-          <h1 className="text-black text-[2rem] font-secondary font-[500]">
-            Easy Exchange
-          </h1>
-          <p className="text-primary font-secondary">
-            Customer can Exchange if find any Fault
-          </p>
-        </div>
-
-        {/* Third Card */}
-        <div className="flex-col text-center">
-          <img
-            className="m-auto"
-            src={customer}
-            width={200}
-            alt="Customer Support"
-          />
-          <h1 className="text-black text-[2rem] font-secondary font-[500]">
-            Customer Support
-          </h1>
-          <p className="text-primary font-secondary">
-            We Provide Quality Stuff to our Customers
-          </p>
-        </div>
-      </div>
+      <FeatCard />
     </>
   );
 };

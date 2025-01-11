@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getOrders } from "../../store/features/orderSlice";
+import { Helmet } from "react-helmet-async";
 
 const TrackOrder = () => {
   const [orderNumber, setOrderNumber] = useState("");
@@ -53,6 +54,14 @@ const TrackOrder = () => {
 
   return (
     <div className="p-6 font-monster max-w-lg mx-auto items-center justify-center   bg-white shadow-md rounded-md">
+      <Helmet>
+        <title>Track Order | Wearers</title>
+        <meta name="description" content="Track your order with order number" />
+        <meta
+          name="keywords"
+          content="hoodies,order,trackorder,wearers.pk,wearers.store,hoodies for boys"
+        />
+      </Helmet>
       <h2 className="text-2xl font-bold text-gray-800 text-center mb-4">
         Track Your Order
       </h2>

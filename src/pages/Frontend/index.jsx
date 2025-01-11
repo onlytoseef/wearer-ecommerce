@@ -16,30 +16,37 @@ import OrderSuccess from "./OrderSuccess";
 import UserDetails from "./UserDetails";
 import TrackSuits from "./TrackSuits";
 import Hoodies from "./Hoodies";
+import { HelmetProvider } from "react-helmet-async";
 
 export default function Index() {
   return (
     <>
-      <ScrollToTop />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/user-details" element={<UserDetails />} />
-        <Route path="/order-success/:orderNumber" element={<OrderSuccess />} />
+      <HelmetProvider>
+        <ScrollToTop />
 
-        <Route path="/track-order" element={<TrackOrder />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/contact" element={<Contact />} />
-        <Route path="/category" element={<Categories />} />
-        <Route path="*" element={<NotFound />} />
-        <Route path="/cart" element={<CartPage />} />
-        <Route path="/products/:productId" element={<ProductDetailsPage />} />
-        <Route path="/jazz-form" element={<JazzCashForm />} />
-        <Route path="/transaction-result" element={<TransactionResult />} />
-        {/* Updated route */}
-        <Route path="/upcoming" element={<ComingSoon />} />
-        <Route path="/track-suits" element={<TrackSuits />} />
-        <Route path="/hoodies" element={<Hoodies />} />
-      </Routes>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/user-details" element={<UserDetails />} />
+          <Route
+            path="/order-success/:orderNumber"
+            element={<OrderSuccess />}
+          />
+
+          <Route path="/track-order" element={<TrackOrder />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/category" element={<Categories />} />
+          <Route path="*" element={<NotFound />} />
+          <Route path="/cart" element={<CartPage />} />
+          <Route path="/products/:productId" element={<ProductDetailsPage />} />
+          <Route path="/jazz-form" element={<JazzCashForm />} />
+          <Route path="/transaction-result" element={<TransactionResult />} />
+          {/* Updated route */}
+          <Route path="/upcoming" element={<ComingSoon />} />
+          <Route path="/track-suits" element={<TrackSuits />} />
+          <Route path="/hoodies" element={<Hoodies />} />
+        </Routes>
+      </HelmetProvider>
     </>
   );
 }
