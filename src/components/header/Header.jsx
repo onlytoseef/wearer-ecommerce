@@ -3,6 +3,13 @@ import { LuUserRound } from "react-icons/lu";
 import { PiShoppingCart } from "react-icons/pi";
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
+import {
+  HomeOutlined,
+  ShopOutlined,
+  InfoCircleOutlined,
+  PhoneOutlined,
+  ProfileOutlined,
+} from "@ant-design/icons"; // Ant Design Icons
 import Logo from "../../assets/images/Logo/Logo.svg";
 import Wearers from "../../assets/images/Logo/Wearers.svg";
 
@@ -130,44 +137,66 @@ export default function Header() {
         </div>
 
         {/* Mobile Menu Links */}
-        {isMobileMenuOpen && (
-          <div className="md:hidden bg-white shadow-lg py-4">
-            <nav className="flex flex-col space-y-4 items-center">
-              <Link
-                to="/"
-                className="text-gray-800 text-lg font-medium"
-                onClick={() => setIsMobileMenuOpen(false)}
-              >
-                Home
-              </Link>
-              <Link
-                to="/about"
-                className="text-gray-800 text-lg font-medium"
-                onClick={() => setIsMobileMenuOpen(false)}
-              >
-                About
-              </Link>
-              <button
-                onClick={() => {
-                  setIsMobileMenuOpen(false);
-                  navigate("/cart");
-                }}
-                className="text-gray-800 text-lg font-medium"
-              >
-                Cart
-              </button>
-              <button
-                onClick={() => {
-                  setIsMobileMenuOpen(false);
-                  navigate("/track-order");
-                }}
-                className="text-gray-800 text-lg font-medium"
-              >
-                Track Order
-              </button>
-            </nav>
-          </div>
-        )}
+        <div
+          className={`fixed top-0 left-0 h-full w-3/4 bg-white shadow-lg transform transition-transform duration-500 ease-in-out ${
+            isMobileMenuOpen ? "translate-x-0" : "-translate-x-full"
+          }`}
+        >
+          <button
+            className="absolute top-4 right-4 text-gray-800 text-2xl"
+            onClick={() => setIsMobileMenuOpen(false)}
+          >
+            ✕
+          </button>
+          <nav className="flex flex-col items-start p-6 space-y-4">
+            <Link
+              to="/"
+              className="text-gray-800 text-lg font-medium flex items-center space-x-2"
+              onClick={() => setIsMobileMenuOpen(false)}
+            >
+              <HomeOutlined />
+              <span>Home</span>
+            </Link>
+            <hr className="w-full border-t border-gray-300" />
+            <Link
+              to="/category"
+              className="text-gray-800 text-lg font-medium flex items-center space-x-2"
+              onClick={() => setIsMobileMenuOpen(false)}
+            >
+              <ShopOutlined />
+              <span>Shop</span>
+            </Link>
+            <hr className="w-full border-t border-gray-300" />
+            <Link
+              to="/about"
+              className="text-gray-800 text-lg font-medium flex items-center space-x-2"
+              onClick={() => setIsMobileMenuOpen(false)}
+            >
+              <InfoCircleOutlined />
+              <span>About</span>
+            </Link>
+            <hr className="w-full border-t border-gray-300" />
+            <Link
+              to="/contact"
+              className="text-gray-800 text-lg font-medium flex items-center space-x-2"
+              onClick={() => setIsMobileMenuOpen(false)}
+            >
+              <PhoneOutlined />
+              <span>Contact Us</span>
+            </Link>
+            <hr className="w-full border-t border-gray-300" />
+            <button
+              onClick={() => {
+                setIsMobileMenuOpen(false);
+                navigate("/track-order");
+              }}
+              className="text-gray-800 text-lg font-medium flex items-center space-x-2"
+            >
+              <ProfileOutlined />
+              <span>Track Order</span>
+            </button>
+          </nav>
+        </div>
       </header>
     </header>
   );
