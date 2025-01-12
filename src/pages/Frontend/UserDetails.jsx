@@ -3,7 +3,6 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { placeOrderAsync } from "../../store/features/orderSlice";
 import { message } from "antd";
-import { Spin } from "antd"; // Importing Spin loader
 
 const UserDetails = () => {
   const location = useLocation();
@@ -20,6 +19,8 @@ const UserDetails = () => {
   });
   const [billingSameAsShipping, setBillingSameAsShipping] = useState(true);
   const [loading, setLoading] = useState(false); // State for loader
+  const [emailError, setEmailError] = useState("");
+  const [phoneError, setPhoneError] = useState(""); // State for phone number error
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -33,9 +34,36 @@ const UserDetails = () => {
     setDeliveryInfo({ ...deliveryInfo, [name]: value });
   };
 
+  const validateEmail = (email) => {
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@gmail\.com$/;
+    return emailRegex.test(email);
+  };
+
+  const validatePhone = (phone) => {
+    const phoneRegex = /^(\+92|03)\d{9}$/;
+    return phoneRegex.test(phone);
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true); // Start loader
+
+    // Reset error messages
+    setEmailError("");
+    setPhoneError("");
+
+    // Validate email and phone number
+    if (!validateEmail(deliveryInfo.email)) {
+      setEmailError("Your email must end with @gmail.com");
+      setLoading(false);
+      return;
+    }
+
+    if (!validatePhone(deliveryInfo.phone)) {
+      setPhoneError("Your phone number must be in the format of 03011234567");
+      setLoading(false);
+      return;
+    }
 
     // Prepare the order data
     const orderData = {
@@ -80,6 +108,10 @@ const UserDetails = () => {
               className="w-full p-3 mb-4 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
               required
             />
+            {emailError && (
+              <div className="text-red-500 text-sm mt-2">{emailError}</div>
+            )}
+
             <div className="grid grid-cols-2 gap-4">
               <input
                 type="text"
@@ -137,6 +169,9 @@ const UserDetails = () => {
               className="w-full p-3 mt-4 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
               required
             />
+            {phoneError && (
+              <div className="text-red-500 text-sm mt-2">{phoneError}</div>
+            )}
 
             {/* Shipping Section */}
             <h2 className="text-xl font-bold text-gray-800 mt-6">
@@ -214,7 +249,7 @@ const UserDetails = () => {
                 </svg>
               ) : (
                 "Complete Order"
-              )}{" "}
+              )}
             </button>
           </form>
         </div>
