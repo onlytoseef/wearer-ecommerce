@@ -1,10 +1,15 @@
-import { Table, Select, message, DatePicker, Spin } from "antd";
+import { Table, Select, message, DatePicker, Spin, Button } from "antd";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getOrders, updateOrderStatus } from "../../store/features/orderSlice";
+import {
+  getOrders,
+  updateOrderStatus,
+  deleteOrderAsync,
+} from "../../store/features/orderSlice";
 import { firestore } from "../../config/firebase";
-import { doc, updateDoc } from "firebase/firestore";
+import { doc, updateDoc, deleteDoc } from "firebase/firestore";
 import moment from "moment";
+import { DeleteOutlined } from "@ant-design/icons";
 
 const { Option } = Select;
 const { RangePicker } = DatePicker;
@@ -16,9 +21,14 @@ const Orders = () => {
   const [filteredOrders, setFilteredOrders] = useState([]);
   const [dateRange, setDateRange] = useState([null, null]);
 
+  // Fetch orders once when the component mounts
   useEffect(() => {
-    dispatch(getOrders());
-  }, [dispatch]);
+    if (Object.keys(orders).length === 0) {
+      dispatch(getOrders());
+    } else {
+      setFilteredOrders(Object.values(orders));
+    }
+  }, [dispatch, orders]);
 
   const handleStatusChange = async (orderNumber, status) => {
     const orderRef = doc(firestore, "orders", orderNumber.toString());
@@ -54,6 +64,26 @@ const Orders = () => {
       );
 
     setFilteredOrders(filtered);
+  };
+
+  const handleDeleteOrder = async (orderNumber) => {
+    // Delete from Firestore
+    const orderRef = doc(firestore, "orders", orderNumber.toString());
+    try {
+      await deleteDoc(orderRef);
+
+      // Dispatch action to delete order from Redux store
+      dispatch(deleteOrderAsync(orderNumber));
+
+      // Update local filtered orders state (optimizing rendering without re-fetching data)
+      setFilteredOrders((prevOrders) =>
+        prevOrders.filter((order) => order.orderNumber !== orderNumber)
+      );
+
+      message.success("Order deleted successfully");
+    } catch (error) {
+      message.error("Failed to delete order");
+    }
   };
 
   const dataSource = (
@@ -152,6 +182,19 @@ const Orders = () => {
         </Select>
       ),
     },
+    {
+      title: "Actions",
+      key: "actions",
+      render: (_, record) => (
+        <Button
+          icon={<DeleteOutlined />}
+          danger
+          onClick={() => handleDeleteOrder(record.orderNumber)}
+        >
+          Delete
+        </Button>
+      ),
+    },
   ];
 
   return (
@@ -175,6 +218,9 @@ const Orders = () => {
           pagination={false}
           scroll={{ x: 1000 }}
           responsive
+          locale={{
+            emptyText: "No orders available",
+          }}
         />
       )}
     </div>
