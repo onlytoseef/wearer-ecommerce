@@ -69,7 +69,7 @@ const Contact = () => {
           <div className="mb-4">
             <h3 className="text-lg font-bold">WhatsApp:</h3>
             <a target="_blank" href="https://wa.me/+923144642896">
-              +92 3144642896
+              +92 3084801871
             </a>
           </div>
         </motion.div>

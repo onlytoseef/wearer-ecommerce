@@ -5,7 +5,7 @@ import { WhatsAppOutlined } from "@ant-design/icons";
 const WhaButton = () => {
   return (
     <a
-      href={`https://wa.me/${+923144642896}`}
+      href={`https://wa.me/${+923084801871}`}
       target="_blank"
       rel="noopener noreferrer"
       className="fixed bottom-4 right-4 z-50"
