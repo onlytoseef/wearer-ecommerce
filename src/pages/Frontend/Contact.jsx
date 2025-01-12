@@ -63,12 +63,12 @@ const Contact = () => {
 
           <div className="mb-4">
             <h3 className="text-lg font-bold">Phone:</h3>
-            <p className="text-gray-600">+92 3144642896</p>
+            <p className="text-gray-600">+92 3084801871</p>
           </div>
 
           <div className="mb-4">
             <h3 className="text-lg font-bold">WhatsApp:</h3>
-            <a target="_blank" href="https://wa.me/+923144642896">
+            <a target="_blank" href="https://wa.me/+923084801871">
               +92 3084801871
             </a>
           </div>
