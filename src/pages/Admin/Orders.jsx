@@ -91,6 +91,7 @@ const Orders = () => {
   ).map((order) => ({
     key: order.orderNumber,
     orderNumber: order.orderNumber,
+    size: order.product?.size || "N/A", // Extract size from the product field
     userDetails: {
       firstName: order.firstName,
       lastName: order.lastName,
@@ -136,6 +137,12 @@ const Orders = () => {
       title: "City",
       key: "city",
       render: (_, record) => record.userDetails?.city || "N/A",
+    },
+    {
+      title: "Product Size",
+      dataIndex: "size", // Add the size column
+      key: "size",
+      render: (size) => size || "N/A",
     },
     {
       title: "Product(s)",
