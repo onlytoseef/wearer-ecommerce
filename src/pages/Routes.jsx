@@ -8,6 +8,7 @@ import AdminLogin from "./Admin/AdminLogin";
 import Header from "../components/header";
 import Footer from "../components/footer";
 import { useSelector } from "react-redux";
+import NotFound from "./Frontend/NotFound";
 
 function Index() {
   const location = useLocation();
@@ -26,7 +27,8 @@ function Index() {
           />
 
           <Route path="/*" element={<Frontend />} />
-          
+          <Route path="*" element={<NotFound />} />
+
           <Route path="/auth/*" element={<Auth />} />
 
           <Route
